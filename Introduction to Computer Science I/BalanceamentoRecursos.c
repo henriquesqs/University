@@ -10,6 +10,7 @@
                              |_|                   |_|    
 	Aluno de Bacharelado em Ciências de Computação 
 		   Universidade de São Paulo (USP) - São Carlos/SP
+		   
 */
 
 #include <stdio.h>
