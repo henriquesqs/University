@@ -1,0 +1,87 @@
+Segue a abaixo um exemplo da entrada para cada uma das operações realizadas pela calculadora e logo abaixo a saída esperada.
+
+-Soma:
+	Entrada:
+		1(código da operação)
+		2(operando 1)
+		2(operando 2)
+	Saída:
+		4(resultado da operação)
+
+-Subtração:
+	Entrada:	
+		2(código da operação)
+		5(operando 1)
+		4(operando 2)
+	Saída:
+		1(resultado da operação)
+
+-Multiplicação:
+	Entrada:
+		3(código da operação)
+		5(operando 1)
+		2(operando 2)
+	Saída:
+		10(resultado da operação)
+
+-Divisão:
+	Entrada:
+		4(código da operação)
+		4(dividendo)
+		2(divisor)
+	Saída:
+		2(resultado da operação)
+
+-Potenciação:
+	Entrada:
+		5(código da operação)
+		2(a base)
+		4(expoente)
+	Saída:
+		16(resultado da operação)
+
+-Raíz quadrada:
+	Entrada:
+		6(código da operação)
+		4(número que se deseja saber a raíz)
+	Saída:
+		2(resultado da operação)
+
+-Tabuada de multiplicação:
+	Entrada:
+		7(código da operação)
+		5(número para se saber a tabela de multiplicação até 10)
+	Saída:
+		x1 = 5
+		x2 = 10
+		x3 = 15
+		x4 = 20
+		x5 = 25
+		x6 = 30
+		x7 = 35
+		x8 = 40
+		x9 = 45
+		x10 = 50
+
+-IMC:
+	Entrada:
+		8(código da operação)
+		60(peso em kilogramas)
+		1(altura, deve ser um número inteiro, pois não trabalhamos com números flutuante)
+	Saída:
+		60(resultado da operação)
+
+-Sequência de Fibonacci:
+	Entrada:
+		9(código da operação)
+		1(primeiro termo da sequência que se deseja mostrar)
+		3(último termo da sequência que se deseja mostrar)
+	Saída:
+		1, 1, 2(resultado da operação)
+
+-Fatorial de um número:
+	Entrada:
+		10(código da operação)
+		5(número para se ccalcular o fatorial)
+	Saída:
+		120(resultado da operação)
