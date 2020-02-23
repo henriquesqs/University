@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Ajuda</title>
+
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style/stylesheet.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.icons8.com/ios/50/000000/help.png"
+    />
+
+    <!-- Linkin' the js used with bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Linkin' the bootstrap 4.3 stylesheet (.css)-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+
+    <!-- Linkin'' the jquery used with bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <!-- Linkin' bootstrap 4.3 js-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Linkin' awesome font 4.0 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css"
+    />
+
+    <!-- Linkin' awesome font 4.7 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- The script below will turn on every tooltip on this code -->
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).on("load", function() {
+        $("#exampleModal").modal("show");
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="bg">
+      <div class="bgInformation">
+        <div class="infText">
+          <h1 style="margin-top: 1vw; font-size: 2.5vw">
+            <center><b>AJUDA SOBRE O SITE</b></center>
+          </h1>
+          <p
+            style="font-size: 1vw; font-family: sans-serif; margin-left: 2.5vw; margin-right: 5%; text-align: justify; text-justify: inter-word"
+          >
+            Para desfrutar do site, é necessário efetuar o cadastro, se ainda
+            não possuir uma conta, e efetuar o login na aba ao lado. Após isso,
+            basta escolher a melhor opção que agrade e torne sua vida mais
+            saudável de um jeito divertido, simples e fácil. As opções de treino
+            são:
+          </p>
+
+          <ul style="font-size: 1vw; margin-left: 10%">
+            <li>Alongamento (treino curto e longo);</li>
+            <li>
+              Treino de ganho de força muscular (treino curto, médio e longo);
+            </li>
+            <li>
+              Treino de cardio e condicionamento físico (treino curto, médio e
+              longo).
+            </li>
+          </ul>
+          <p
+            style="font-size: 1vw; margin-left: 5%; margin-right: 5%; text-align: justify; text-justify: inter-word"
+          >
+            Os treinos de alongamento buscam trabalhar todo o corpo para uma
+            maior flexibilidade e outros benefícios, como, por exemplo, melhorar
+            postura, circulação sanguínea e trazer um relaxamento corporal.
+            Ganho de força muscular foca na hipertrofia e explosão muscular.
+            Para isso, altas cargas são necessárias com baixas repetições. Já o
+            cardio e o condicionamento físico se preocupam em exercícios com
+            alta repetição, buscando sempre a falha muscular para o corpo se
+            acostumar com situações extremas.
+          </p>
+        </div>
+      </div>
+      <div
+        class="container"
+        style="z-index: 15; background: #080323; height: 17vw; width: 23vw; position: absolute; left:65%"
+      >
+        <div
+          class="col-md-12 text-left"
+          style="color: white; font-family: sans-serif; font-weight: bold; font-size:1.5vw;  margin-top: 2vw"
+        >
+          Bem-vindo, <span th:utext="${firstName}"></span>!
+        </div>
+        <div class="container">
+          <h7
+            style="color: white; font-family: sans-serif; font-weight: lighter; font-size: 1vw;  margin-top: 5vw"
+            >O seu progresso atual:</h7
+          >
+          <p></p>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped bg-warning progress-bar-animated"
+              role="progressbar"
+              th:style=" 'width:' + ${progress} + '%' + ';'"
+              th:aria-valuenow="${progress}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <div
+            class="col-md-12 text-left"
+            style="margin-top: 3vw; margin-left: -1vw"
+          >
+            <button
+              type="button"
+              th:action="@{/#}"
+              class="btn btn-warning"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Alterar detalhes da conta"
+              style="color: white; font-weight: bold;"
+            >
+              PREFERENCIAS
+            </button>
+            <a class="btn btn-danger" th:href="@{/logout}" role="button"
+              >SAIR</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="header_rectangle"
+        style="background-color: #00001C; font-family: Helvetica;"
+      >
+        <div class="logoText">
+          <a th:href="@{/home/home}" style="text-decoration: none; color: WHITE;"
+            >wwwFIT</a
+          >
+        </div>
+      </div>
+
+      <nav
+        class="navbar navbar-expand-lg navbar navbar-light"
+        style="background-color: white; z-index: 3"
+      >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" th:href="@{/home/home}"
+              >INÍCIO <span class="sr-only">(current)</span>
+            </a>
+            <a
+              th:href="@{/home/help}"
+              class="nav-item nav-link"
+              style="color: #00001C"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Como usar o app?"
+              >AJUDA</a
+            >
+            <a
+              class="nav-item nav-link"
+              style="color: #00001C"
+              th:href="@{/home/about}"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Saiba mais sobre o app"
+              >SOBRE</a
+            >
+          </div>
+        </div>
+      </nav>
+    </div>
+  </body>
+</html>

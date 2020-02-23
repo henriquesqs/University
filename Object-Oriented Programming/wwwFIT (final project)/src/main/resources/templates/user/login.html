@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html
+  lang="pt-BR"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Página Inicial</title>
+
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style/stylesheet.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.icons8.com/ios/50/000000/dumbbell.png"
+    />
+
+    <!-- Linkin' the js used with bootstrap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' the bootstrap 4.3 stylesheet (.css)-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Linkin'' the jquery used with bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' bootstrap 4.3 js-->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' awesome font 4.0 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css"
+    />
+
+    <!-- Linkin' awesome font 4.7 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- The script below will turn on every tooltip on this code -->
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).on("load", function() {
+        $("#exampleModal").modal("show");
+      });
+    </script>
+  </head>
+
+  <body>
+    <!-- Abaixo, exibimos um modal (popup) sempre que um erro for encontrado -->
+    <div
+      class="modal"
+      th:if="${param.error}"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              OPS! Encontramos um erro...
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Email e/ou senha incorreto(s). Por favor, corrija e tente novamente!
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg" style="position: fixed">
+      <div
+        class="container"
+        style="z-index: 15; background: #080323; height: 290px; width: 400px; position: absolute; left:65%"
+      >
+        <form th:action="@{/login}" method="post">
+          <div
+            class="col-md-12 text-left"
+            style="color: white; font-family: sans-serif; font-weight: bold; font-size: 15px; left: 4%; margin-top: 5%"
+          >
+            EFETUE O LOGIN E APROVEITE O SITE
+          </div>
+
+          <div class="container">
+            <div class="col-md-12 text-left" style="margin-top: 4%">
+              <i class="fa fa-at" style="color: white"></i>
+              <label for="inputEmail" style="color: white">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="email@email.com"
+                required
+              />
+            </div>
+
+            <div class="col-md-12 text-left">
+              <i class="fa fa-key" style="color: white"></i>
+              <label for="inputPassword" style="color: white; margin-top:4%"
+                >Senha</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="off"
+                class="form-control"
+                placeholder="***********"
+                required
+              />
+            </div>
+
+            <div class="col-md-12 text-left" style="margin-top:5%">
+              <button type="submit" class="btn btn-success" style="width:130px">
+                LOGIN
+              </button>
+              <button type="button" class="btn btn-danger" th:href="@{/login}">
+                ESQUECI A SENHA
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div
+        id="header_rectangle"
+        style="background-color: #00001C; font-family: Helvetica"
+      >
+        <div class="logoText">
+          <a th:href="@{/}" style="text-decoration: none; color: WHITE;"
+            >wwwFIT</a
+          >
+        </div>
+      </div>
+
+      <nav
+        class="navbar navbar-expand-lg navbar navbar-light"
+        style="background-color: white; z-index: 3"
+      >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" th:href="@{/}"
+              >INÍCIO <span class="sr-only">(current)</span>
+            </a>
+            <a
+              th:href="@{/help}"
+              class="nav-item nav-link"
+              style="color: #00001C"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Como usar o app?"
+              >AJUDA</a
+            >
+            <a
+              class="nav-item nav-link"
+              style="color: #00001C"
+              th:href="@{/about}"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Saiba mais sobre o app"
+              >SOBRE</a
+            >
+            <a
+              class="nav-item nav-link"
+              style="color: #00001C"
+              th:href="@{/signup}"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Clique para criar uma conta"
+              >CADASTRE-SE</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-ride="carousel"
+        style="max-width: 50vw; margin-left: 5vw; margin-top: 3vw"
+      >
+        <ol class="carousel-indicators">
+          <li
+            data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            class="active"
+          ></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              class="d-block w-100"
+              src="images\alongamento3.png"
+              alt="First slide"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5 style="text-shadow: 1px 2px 3px black">
+                TREINO DE ALONGAMENTO
+              </h5>
+              <p style="text-shadow: 2px 2px 1px black">
+                Relaxe o corpo, corrija a postura, melhore a circulação
+                sanguínea...
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100"
+              src="images\cardio5.png"
+              alt="Second slide"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5 style="text-shadow: 1px 2px 3px black">TREINO DE CARDIO</h5>
+              <p style="text-shadow: 1px 2px 3px black">
+                Emagreça, melhore o condicionamento físico, alivie o estresse...
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100"
+              src="images\força3.png"
+              alt="Third slide"
+              style="border-color: #080323; border-block-width: 20vw"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5 style="text-shadow: 1px 2px 3px black">TREINO DE FORÇA</h5>
+              <p style="text-shadow: 1px 2px 3px black">
+                Ganhe força e deixe os principais músculos do corpo mais
+                bonitos...
+              </p>
+            </div>
+          </div>
+        </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Próximo</span>
+        </a>
+      </div>
+      >
+    </div>
+  </body>
+</html>

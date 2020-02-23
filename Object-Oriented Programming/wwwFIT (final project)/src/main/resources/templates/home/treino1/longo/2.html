@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>T1: Ex. 2</title>
+
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style/stylesheet.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.icons8.com/ios/50/000000/dumbbell.png"
+    />
+
+    <!-- Font awesome 5 kit -->
+    <script src="https://kit.fontawesome.com/ced1c3619a.js"></script>
+
+    <!-- Linkin' the js used with bootstrap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' the bootstrap 4.3 stylesheet (.css)-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Linkin'' the jquery used with bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' bootstrap 4.3 js-->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' awesome font 4.0 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css"
+    />
+
+    <!-- Linkin' awesome font 4.7 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- The script below will turn on every tooltip on this code -->
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).on("load", function() {
+        $("#exampleModal").modal("show");
+      });
+    </script>
+  </head>
+
+  <body>
+    <!-- Abaixo, exibimos um modal (popup) com um aviso para o usuario -->
+    <!-- <div
+      class="modal"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              ATENÇÃO
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Cada exercício possui um tempo próprio. Para que o treino tenha um
+            rendimento máximo, busque realizar os exercícios com boas posturas e
+            relaxe ao máximo a musculatura, para que o progresso seja mais
+            eficiente e os resultados cheguem mais rápidos.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="bg">
+      <!-- Start of Header and navbar -->
+      <div
+        id="header_rectangle"
+        style="background-color: #00001C; font-family: Helvetica;"
+      >
+        <div class="logoText">
+          <a
+            th:href="@{/home/home}"
+            style="text-decoration: none; color: WHITE;"
+            >wwwFIT</a
+          >
+        </div>
+      </div>
+
+      <nav
+        class="navbar navbar-expand-lg navbar navbar-light"
+        style="background-color: white; z-index: 3"
+      >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" th:href="@{/home/home}"
+              >INÍCIO <span class="sr-only">(current)</span>
+            </a>
+            <a
+              th:href="@{/home/help}"
+              class="nav-item nav-link"
+              style="color: #00001C"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Como usar o app?"
+              >AJUDA</a
+            >
+            <a
+              class="nav-item nav-link"
+              style="color: #00001C"
+              th:href="@{/home/about}"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Saiba mais sobre o app"
+              >SOBRE</a
+            >
+          </div>
+        </div>
+      </nav>
+      <!-- End of header and navbar -->
+
+      <!-- Start of card development -->
+
+      <div
+        class="card-deck"
+        style="width: 90vw; margin-left: 3vw; margin-top: 2vw; "
+      >
+        <!-- Start of Details card -->
+        <div class="card text-center">
+          <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Detalhes</a>
+              </li>
+              <li class="nav-item">
+                <!-- data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="Alterar detalhes da conta" -->
+                <a
+                  class="nav-link"
+                  style="color: gray"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="Em breve!"
+                  >Video demonstrativo</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Alongamento de Pulso</h5>
+            <p class="card-text" style="text-align: justify">
+              Esse exercício é realizado em pé e é dividido em 4 partes.
+            </p>
+            <p class="card-text" style="text-align: justify">
+              <i class="far fa-clock"></i>
+              <strong> Realize cada um deles por 30 segundos. </strong>
+            </p>
+
+            <img
+              class="card-img-top"
+              style="margin-top: 0vw; width: 21vw"
+              src="/images/alongamento/alongamentoPulso.jpg"
+            />
+          </div>
+        </div>
+        <!-- End of Details card -->
+        <!-- Start of Exercises card -->
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              FAÇA OS EXERCÍCIOS ABAIXO COM
+              <p>AUXÍLIO DE UM CRONOMETRO</p>
+            </h5>
+            <ul
+              class="list-group list-group-flush"
+              style="overflow-y: auto; height: 25vw"
+            >
+              <li class="list-group-item">
+                <p
+                  class="card-item"
+                  style="color: black; text-align: justify; text-align: justify"
+                >
+                  1. Com o braço esquerdo esticado, com o auxílio da mão
+                  direita, flexione o pulso esquerdo com a palma da mão virada
+                  para si.
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <p class="card-item" style="color: black; text-align: justify">
+                  2. Com o braço direito esticado, com o auxílio da mão
+                  esquerda, flexione o pulso direito com a palma da mão virada
+                  para si.
+                </p>
+              </li>
+              <li class="list-group-item">
+                <p class="card-item" style="color: black; text-align: justify">
+                  3. Com o braço esquerdo esticado, com o auxílio da mão
+                  direita, flexione o pulso esquerdo com a palma da mão virada
+                  para frente.
+                </p>
+              </li>
+              <li class="list-group-item">
+                <p class="card-item" style="color: black; text-align: justify">
+                  4. Com o braço direito esticado, com o auxílio da mão
+                  esquerda, flexione o pulso direito com a palma da mão virada
+                  para frente.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- End of exercises card -->
+        <!-- Start of options card -->
+        <div class="card">
+          <div class="card-header text-center">
+            OPÇÕES DE USO
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-center">
+              <i class="fas fa-exclamation-circle"></i>
+              SEJA VERDADEIRO COM VOCÊ MESMO
+            </h6>
+            <p class="card-text" style="text-align: justify">
+              Vá para o próximo exercício caso tenha acabado esse.
+              <strong>Mas lembre-se:</strong> de nada adianta mentir que fez os
+              exercícios.
+            </p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <i class="fas fa-chevron-circle-right"></i>
+                <a
+                  th:href="@{/home/treino1/longo/3}"
+                  class="card-link"
+                  style="color: black"
+                  >Próximo exercício</a
+                >
+              </li>
+
+              <li class="list-group-item">
+                <i class="fas fa-times-circle"></i>
+                <a
+                  class="card-link"
+                  th:href="@{/home/treino1/index}"
+                  style="color: black"
+                  >Desistir do treino longo</a
+                >
+              </li>
+
+              <li class="list-group-item">
+                <i class="fas fa-chevron-circle-left"></i>
+                <a
+                  class="card-link"
+                  th:href="@{/home/home}"
+                  style="color: black"
+                  >Voltar para a guia de treinos</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- End of options card -->
+      </div>
+    </div>
+  </body>
+</html>

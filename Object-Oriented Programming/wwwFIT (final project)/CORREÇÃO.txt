@@ -1,0 +1,6 @@
+Se o script de criação da das tabelas não funcionar:
+ - execute a primeira linha (create db aplicativo);
+ - selecione a db recém criada;
+ - execute o restante das linhas.
+
+O xampp deve estar assim: https://prnt.sc/r6kh7w

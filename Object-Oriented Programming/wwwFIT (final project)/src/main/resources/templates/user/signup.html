@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html
+  lang="pt-BR"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Registrar-se</title>
+
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style/stylesheet.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.icons8.com/ios/50/000000/add-user-male.png"
+    />
+
+    <!-- Linkin' the js used with bootstrap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Linkin' the bootstrap 4.3 stylesheet (.css)-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <!-- Linkin'' the jquery used with bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Linkin' bootstrap 4.3 js-->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Linkin' awesome font 4.0 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css"
+    />
+    <!-- Linkin' awesome font 4.7 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- The script below will turn on every tooltip on this code -->
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="signUpBg"></div>
+
+    <div class="col-md-10 text-center">
+      
+      <!--    
+        This form below indicates that we are going to use the /signup action created in 
+        src\main\java\com\aplicativo\controller\UserController.java
+     	 -->
+      <form
+        class="form-horizontal"
+        role="form"
+        method="POST"
+        th:action="@{/signup}"
+        th:object="${user}"
+      >
+        <!-- Here we are creating the attributes to the successfull msg -->
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <div
+              class="alert alert-success alert-dismissible fade show"
+              style="position: absolute; top: 1%; left: 10%"
+              role="alert"
+              th:if="${msg}"
+            >
+              <strong>SUCESSO!</strong> Usuario cadastrado com êxito.
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Here is the main text of the page -->
+        <div class="row">
+          <div class="col-md-6" style="margin-top: 5%; margin-left: 5%">
+            <h2>Registrar novo usuário</h2>
+            <hr />
+          </div>
+        </div>
+
+        <!-- The first label to be filled is the user's first name -->
+        <div class="row">
+          <div class="col-md-6 text-left" style="margin-left: 5%">
+            <i class="fa fa-user-circle-o"></i>
+            <label for="name">Primeiro nome</label>
+
+            <div class="form-group">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon"></div>
+                <input
+                  type="text"
+                  th:field="*{firstname}"
+                  class="form-control"
+                  id="firstname"
+                  placeholder="Henrique"
+                  required
+                  autofocus
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The second label to be filled is the user's last name -->
+        <div class="row">
+          <div class="col-md-6 text-left" style="margin-left: 5%">
+            <i class="fa fa-user-circle-o"></i>
+            <label for="name">Ultimo nome</label>
+
+            <div class="form-group">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon"></div>
+                <input
+                  type="text"
+                  th:field="*{lastname}"
+                  class="form-control"
+                  id="lastname"
+                  placeholder="dos Santos"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The third label to be filled is the user's email -->
+        <div class="row">
+          <div class="col-md-6 text-left" style="margin-left: 5%">
+            <i class="fa fa-at"></i> <label for="email">Email</label>
+
+            <div class="form-group">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon"></div>
+                <input
+                  type="text"
+                  th:field="*{email}"
+                  class="form-control"
+                  id="email"
+                  placeholder="henrique@graduacaonosodeia.com"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Here we control if the entered email is already in use -->
+
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            style="position: absolute; top: 1%; left: 10%"
+            role="alert"
+            th:if="${#fields.hasErrors('email')}"
+          >
+            <strong>EMAIL INVÁLIDO!</strong> O email digitado já esta sendo
+            usado.
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- The fourth label to be filled is the user's password -->
+        <div class="row">
+          <div class="col-md-6 text-left" style="margin-left: 5%">
+            <i class="fa fa-key"></i> <label for="password">Senha</label>
+
+            <div class="form-group has-danger">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon"></div>
+                <input
+                  type="password"
+                  th:field="*{password}"
+                  class="form-control"
+                  id="password"
+                  placeholder="**********"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-control-feedback">
+              <span
+                class="text-danger align-middle"
+                th:if="${#fields.hasErrors('password')}"
+                th:errors="*{password}"
+              >
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Here's the 'register' and 'back' buttons -->
+        <div class="row">
+          <div class="col-md-6 text-left" style="margin-left: 5%">
+            <button
+              type="submit"
+              class="btn btn-outline-success"
+              style="width: 10rem"
+            >
+              Registrar
+            </button>
+            <a
+              class="btn btn-outline-danger"
+              th:href="@{/}"
+              role="button"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Retornar pra página de login"
+              >Voltar</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

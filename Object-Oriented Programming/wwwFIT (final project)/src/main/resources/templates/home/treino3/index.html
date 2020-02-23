@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Página Inicial</title>
+
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style/stylesheet.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.icons8.com/ios/50/000000/dumbbell.png"
+    />
+
+    <!-- Linkin' the js used with bootstrap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' the bootstrap 4.3 stylesheet (.css)-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Linkin'' the jquery used with bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' bootstrap 4.3 js-->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' awesome font 4.0 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css"
+    />
+
+    <!-- Linkin' awesome font 4.7 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- The script below will turn on every tooltip on this code -->
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).on("load", function() {
+        $("#exampleModal").modal("show");
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="bg">
+      <!-- Container with all the training options -->
+      <div
+        class="container"
+        style="overflow-y: auto; z-index: 15; background: #080323; height: 45vw; width: 23vw; position: absolute; left:65%"
+      >
+        <div class="media">
+          <h5
+            class="mt-3"
+            style="margin-left: 1vw; font-size: 2vw; font-weight: bold; color: white"
+          >
+            TREINO DE FORÇA
+          </h5>
+          <img
+            src="/images/gym.svg"
+            style="width: 5vw; transform: scaleX(-1); margin-right: 1vw; margin-top: 1vw"
+          />
+        </div>
+
+        <!-- <div class="treinoCurto">
+          <p
+            style="background-color: white; color: #080323; font-size: 2vw; margin-top: 1vw; text-align: center"
+          >
+            TREINO CURTO
+          </p>
+
+          <ul class="list-unstyled" style="margin-left: 1vw; ">
+            <li class="media">
+              <img class="mr-3" src="/images/time.svg" style="width: 2vw" />
+              <div class="media-body" style="color: white">
+                <h6 class="mt-1">20 MINUTOS</h6>
+              </div>
+            </li>
+
+            <li class="media my-3">
+              <img
+                class="mr-3"
+                src="/images/checklist.svg"
+                style="width: 2.3vw"
+              />
+              <div class="media-body" style="color: white">
+                <h6 style="font-size: 1vw">PREPARAR PARA EXERCÍCIOS RÁPIDOS</h6>
+              </div>
+            </li>
+
+            <li class="media my-1">
+              <img
+                class="mr-3"
+                src="/images/right-arrow.svg"
+                style="width: 2vw"
+              />
+              <div class="media-body" style="color: white">
+                <a href="#" style="text-decoration: none; color: WHITE;"
+                  >INICIAR</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="treinoMedio">
+          <p
+            style="background-color: white; color: #080323; font-size: 2vw; margin-top: 1vw; text-align: center"
+          >
+            TREINO MEDIO
+          </p>
+
+          <ul class="list-unstyled" style="margin-left: 1vw; ">
+            
+            <li class="media">
+              <img class="mr-3" src="/images/time.svg" style="width: 2vw" />
+              <div class="media-body" style="color: white">
+                <h6 class="mt-1">40 MINUTOS</h6>
+              </div>
+            </li>
+
+            
+            <li class="media my-3">
+              <img
+                class="mr-3"
+                src="/images/checklist.svg"
+                style="width: 2.3vw"
+              />
+              <div class="media-body" style="color: white">
+                <h6 style="font-size: 1vw">
+                  PREPARAR PARA EXERCÍCIOS INTERMEDIÁRIOS
+                </h6>
+              </div>
+            </li>
+
+            
+            <li class="media my-1">
+              <img
+                class="mr-3"
+                src="/images/right-arrow.svg"
+                style="width: 2vw"
+              />
+              <div class="media-body" style="color: white">
+                <a href="#" style="text-decoration: none; color: WHITE;"
+                  >INICIAR</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="treinoLongo">
+          <p
+            style="background-color: white; color: #080323; font-size: 2vw; margin-top: 1vw; text-align: center"
+          >
+            TREINO LONGO
+          </p>
+
+          <ul class="list-unstyled" style="margin-left: 1vw; ">
+            
+            <li class="media">
+              <img class="mr-3" src="/images/time.svg" style="width: 2vw" />
+              <div class="media-body" style="color: white">
+                <h6 class="mt-1">60 MINUTOS</h6>
+              </div>
+            </li>
+
+            
+            <li class="media my-3">
+              <img
+                class="mr-3"
+                src="/images/checklist.svg"
+                style="width: 2.3vw"
+              />
+              <div class="media-body" style="color: white">
+                <h6 style="font-size: 1vw">
+                  PREPARAR PARA EXERCÍCIOS PROLONGADOS
+                </h6>
+              </div>
+            </li>
+
+            
+            <li class="media my-1">
+              <img
+                class="mr-3"
+                src="/images/right-arrow.svg"
+                style="width: 2vw"
+              />
+              <div class="media-body" style="color: white">
+                <a href="#" style="text-decoration: none; color: WHITE;"
+                  >INICIAR</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+
+      <div
+        id="header_rectangle"
+        style="background-color: #00001C; font-family: Helvetica;"
+      >
+        <div class="logoText">
+          <a th:href="@{/home/home}" style="text-decoration: none; color: WHITE;"
+            >wwwFIT</a
+          >
+        </div>
+      </div>
+
+      <nav
+        class="navbar navbar-expand-lg navbar navbar-light"
+        style="background-color: white; z-index: 3"
+      >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" th:href="@{/home/home}"
+              >INÍCIO <span class="sr-only">(current)</span>
+            </a>
+            <a
+              th:href="@{/home/help}"
+              class="nav-item nav-link"
+              style="color: #00001C"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Como usar o app?"
+              >AJUDA</a
+            >
+            <a
+              class="nav-item nav-link"
+              style="color: #00001C"
+              th:href="@{/home/about}"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Saiba mais sobre o app"
+              >SOBRE</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <div
+        class="card-deck"
+        style="width: 60vw; margin-left: 3vw; margin-top: 2vw"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="/images/forca2.png"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">AINDA FALTA UMA ETAPA!</h5>
+            <p class="card-text">
+              Ganhe força e deixe os principais músculos do corpo mais bonitos e
+              volumosos no treino de força. Mas antes, selecione ao lado qual
+              modalidade do treino você gostaria de começar.
+            </p>
+          </div>
+        </div>
+        <div class="card" style="width: 10vw; margin-top: 0vw">
+          <div class="card-body">
+            <h5 class="card-title">SELECIONE ABAIXO A MODALIDADE</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a th:href="@{/home/treino3/1/index}" class="card-link" style="color: black"
+                  >Corpo inteiro</a
+                >
+              </li>
+              <li class="list-group-item">
+                <a href="#" class="card-link text-muted" style="color: black" data-toggle="tooltip" data-placement="right" title="Em breve!"
+                  >Peito, ombro e tríceps</a
+                >
+              </li>
+              <li class="list-group-item">
+                <a href="#" class="card-link text-muted" style="color: black" data-toggle="tooltip" data-placement="right" title="Em breve!"
+                  >Costas, bíceps e abdômen</a
+                >
+              </li>
+              <li class="list-group-item">
+                <a href="#" class="card-link text-muted" style="color: black" data-toggle="tooltip" data-placement="right" title="Em breve!"
+                  >Membros inferiores</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

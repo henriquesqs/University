@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Página Inicial</title>
+
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style/stylesheet.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.icons8.com/ios/50/000000/dumbbell.png"
+    />
+
+    <!-- Linkin' the js used with bootstrap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' the bootstrap 4.3 stylesheet (.css)-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Linkin'' the jquery used with bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' bootstrap 4.3 js-->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Linkin' awesome font 4.0 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css"
+    />
+
+    <!-- Linkin' awesome font 4.7 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- The script below will turn on every tooltip on this code -->
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).on("load", function() {
+        $("#exampleModal").modal("show");
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="bg">
+      <div
+        class="container"
+        style="z-index: 15; background: #080323; height: 17vw; width: 23vw; position: absolute; left:65%"
+      >
+        <div
+          class="col-md-12 text-left"
+          style="color: white; font-family: sans-serif; font-weight: bold; font-size:1.5vw;  margin-top: 2vw"
+        >
+          Bem-vindo, <span th:utext="${firstName}"></span>!
+        </div>
+        <div class="container">
+          <h7
+            style="color: white; font-family: sans-serif; font-weight: lighter; font-size: 1vw;  margin-top: 5vw"
+            >O seu progresso atual:</h7
+          >
+          <p></p>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped bg-warning progress-bar-animated"
+              role="progressbar"
+              th:style=" 'width:' + ${progress} + '%' + ';'"
+              th:aria-valuenow="${progress}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <div
+            class="col-md-12 text-left"
+            style="margin-top: 3vw; margin-left: -1vw"
+          >
+            <button
+              type="button"
+              th:action="@{/#}"
+              class="btn btn-warning"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Alterar detalhes da conta"
+              style="color: white; font-weight: bold;"
+            >
+              PREFERENCIAS
+            </button>
+            <a class="btn btn-danger" th:href="@{/logout}" role="button"
+              >SAIR</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="header_rectangle"
+        style="background-color: #00001C; font-family: Helvetica;"
+      >
+        <div class="logoText">
+          <a th:href="@{/home/home}" style="text-decoration: none; color: WHITE;"
+            >wwwFIT</a
+          >
+        </div>
+      </div>
+
+      <nav
+        class="navbar navbar-expand-lg navbar navbar-light"
+        style="background-color: white; z-index: 3"
+      >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" th:href="@{/home/home}"
+              >INÍCIO <span class="sr-only">(current)</span>
+            </a>
+            <a
+              th:href="@{/home/help}"
+              class="nav-item nav-link"
+              style="color: #00001C"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Como usar o app?"
+              >AJUDA</a
+            >
+            <a
+              class="nav-item nav-link"
+              style="color: #00001C"
+              th:href="@{/home/about}"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Saiba mais sobre o app"
+              >SOBRE</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <div
+        class="card-deck"
+        style="margin-left: 0.9vw; width: 60vw; margin-top: 1vw;"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            th:style="${didFirstT} ? 'filter: grayscale(100%);' : ''"
+            data-toggle="tooltip"
+            data-placement="top"
+            th:title="${doneEx1}"
+            src="/images/alongamento.jpg"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">TREINO DE ALONGAMENTO</h5>
+            <p class="card-text">
+              Relaxe o corpo, corrija a postura, melhore a circulação sanguínea
+              e acabe com as dores musculares com esse treino completo de
+              alongamento.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a
+              th:href="@{/home/treino1/index}"
+              class="h5 card-link"
+              style="color: gray; "
+              >Iniciar treino</a
+            >
+          </div>
+        </div>
+        
+        <div class="card">
+          <img
+            class="card-img-top"
+            th:style="${didSecondT} ? 'filter: grayscale(100%);' : ''"
+            src="/images/cardio2.png"
+            data-toggle="tooltip"
+            data-placement="top"
+            th:title="${doneEx2}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">TREINO DE CARDIO</h5>
+            <p class="card-text">
+              Emagreça, melhore o condicionamento físico, alivie o estresse e
+              mantenha sua saúde respiratória e cardíaca em dia seguindo o passo
+              a passo do nosso treino de cardio.
+            </p>
+          </div>
+          <div class="card-footer">
+            <!-- <button type="button" class="btn btn-dark">INICIAR TREINO</button> -->
+            <a
+              th:href="@{/home/treino2/index}"
+              class="h5 card-link"
+              style="color: gray; "
+              >Iniciar treino</a
+            >
+          </div>
+        </div>
+        
+        <div class="card">
+          <img
+            class="card-img-top"
+            th:style="${didThirdT} ? 'filter: grayscale(100%); ' : ''"
+            src="/images/forca2.png"
+            data-toggle="tooltip"
+            data-placement="top"
+            th:title="${doneEx3}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">TREINO DE FORÇA</h5>
+            <p class="card-text">
+              Ganhe força e deixe os principais músculos do corpo mais bonitos e
+              volumosos no treino de força.
+            </p>
+          </div>
+          <div class="card-footer">
+            <!-- <button type="button" class="btn btn-dark">INICIAR TREINO</button> -->
+            <a
+              th:href="@{/home/treino3/index}"
+              class="h5 card-link"
+              style="color: gray; "
+              >Iniciar treino</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

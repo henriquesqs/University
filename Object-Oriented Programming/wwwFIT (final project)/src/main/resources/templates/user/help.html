@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html
+  lang="pt-BR"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Ajuda</title>
+
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style/stylesheet.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.icons8.com/ios/50/000000/help.png"
+    />
+
+    <!-- Linkin' the js used with bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Linkin' the bootstrap 4.3 stylesheet (.css)-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+
+    <!-- Linkin'' the jquery used with bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <!-- Linkin' bootstrap 4.3 js-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Linkin' awesome font 4.0 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css"
+    />
+
+    <!-- Linkin' awesome font 4.7 stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- The script below will turn on every tooltip on this code -->
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(window).on("load", function() {
+        $("#exampleModal").modal("show");
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="bgInformation">
+      <div class="infText">
+        <h1 style="margin-top: 1vw; font-size: 2.5vw">
+          <center><b>AJUDA SOBRE O SITE</b></center>
+        </h1>
+        <p
+          style="font-size: 1vw; font-family: sans-serif; margin-left: 2.5vw; margin-right: 5%; text-align: justify; text-justify: inter-word"
+        >
+          Para desfrutar do site, é necessário efetuar o cadastro, se ainda não
+          possuir uma conta, e efetuar o login na aba ao lado. Após isso, basta
+          escolher a melhor opção que agrade e torne sua vida mais saudável de
+          um jeito divertido, simples e fácil. As opções de treino são:
+        </p>
+
+        <ul style="font-size: 1vw; margin-left: 10%">
+          <li>Alongamento (treino curto e longo);</li>
+          <li>Treino de ganho de força muscular (treino curto, médio e longo);</li>
+          <li>Treino de cardio e condicionamento físico (treino curto, médio e longo).</li>
+        </ul>
+        <p
+          style="font-size: 1vw; margin-left: 5%; margin-right: 5%; text-align: justify; text-justify: inter-word"
+        >
+          Os treinos de alongamento buscam trabalhar todo o corpo para uma maior
+          flexibilidade e outros benefícios, como, por exemplo, melhorar
+          postura, circulação sanguínea e trazer um relaxamento corporal. Ganho
+          de força muscular foca na hipertrofia e explosão muscular. Para isso,
+          altas cargas são necessárias com baixas repetições. Já o cardio e o
+          condicionamento físico se preocupam em exercícios com alta repetição,
+          buscando sempre a falha muscular para o corpo se acostumar com
+          situações extremas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Abaixo, exibimos um modal (popup) sempre que um erro for encontrado -->
+    <div
+      class="modal"
+      th:if="${param.error}"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              OPS! Encontramos um erro...
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Email e/ou senha incorreto(s). Por favor, corrija e tente novamente!
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="container"
+      style="z-index: 15; background: #080323; height: 290px; width: 400px; position: absolute; left: 65%"
+    >
+      <form th:action="@{/login}" method="post">
+        <div
+          class="col-md-12 text-left"
+          style="color: white; font-family: sans-serif; font-weight: bold; font-size: 15px; left: 4%; margin-top: 5%"
+        >
+          EFETUE O LOGIN E APROVEITE O SITE
+        </div>
+
+        <div class="container">
+          <div class="col-md-12 text-left" style="margin-top: 4%">
+            <i class="fa fa-at" style="color: white"></i>
+            <label for="inputEmail" style="color: white">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="email@email.com"
+              required
+            />
+          </div>
+
+          <div class="col-md-12 text-left">
+            <i class="fa fa-key" style="color: white"></i>
+            <label for="inputPassword" style="color: white; margin-top: 4%"
+              >Senha</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="off"
+              class="form-control"
+              placeholder="***********"
+              required
+            />
+          </div>
+
+          <div class="col-md-12 text-left" style="margin-top: 5%">
+            <button type="submit" class="btn btn-success" style="width: 130px">
+              LOGIN
+            </button>
+            <button type="button" class="btn btn-danger" th:href="@{/login}">
+              ESQUECI A SENHA
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div
+      id="header_rectangle"
+      style="background-color: #00001C; font-family: Helvetica"
+    >
+      <div class="logoText">
+        <a th:href="@{/}" style="text-decoration: none; color: WHITE;"
+          >wwwFIT</a
+        >
+      </div>
+    </div>
+
+    <nav
+      class="navbar navbar-expand-lg navbar navbar-light"
+      style="background-color: white; z-index: 3"
+    >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" th:href="@{/}"
+            >INÍCIO <span class="sr-only">(current)</span>
+          </a>
+          <a
+            th:href="@{/help}"
+            class="nav-item nav-link"
+            style="color: #00001C"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Como usar o app?"
+            >AJUDA</a
+          >
+          <a
+            class="nav-item nav-link"
+            style="color: #00001C"
+            th:href="@{/about}"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Saiba mais sobre o app"
+            >SOBRE</a
+          >
+          <a
+            class="nav-item nav-link"
+            style="color: #00001C"
+            th:href="@{/signup}"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Clique para criar uma conta"
+            >CADASTRE-SE</a
+          >
+        </div>
+      </div>
+    </nav>
+    <div class="bg" style="position: fixed"></div>
+  </body>
+</html>
