@@ -1,0 +1,4 @@
+saidas esperadas:
+caso1 - 5
+caso2 - 7
+caso3 - 8
