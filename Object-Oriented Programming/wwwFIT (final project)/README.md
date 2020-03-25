@@ -44,5 +44,5 @@ That's our application! Hope you've enjoyed. :)
 ### > Credits
 Eduardo Pennone;
 Henrique dos Santos (me);
-Leonardo Rossi;
+Leonardo Rossi; and
 [Witor de Oliveira](https://github.com/witormao).
