@@ -1,4 +1,4 @@
-Se o script de criação da das tabelas não funcionar:
+Se o script de criação das tabelas não funcionar:
  - execute a primeira linha (create db aplicativo);
  - selecione a db recém criada;
  - execute o restante das linhas.
