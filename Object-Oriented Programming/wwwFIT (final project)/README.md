@@ -1,12 +1,12 @@
 # wwwFit
 This project was designed and developed with the help of my teammates. The idea is to give users the opportunity to do some physical exercises at their homes.
 
- ### > Development
+ ### Development
 The backend was developed using **Java** and [**Spring framework**](https://spring.io/) with its dependencies. The frontend was developed with **HTML**, **CSS** and some **JavaScript** functions.
 
 ###### For portuguese speakers: click [**here**](https://github.com/henriquesqs/Graduation-codes/blob/master/Object-Oriented%20Programming/wwwFIT%20%28final%20project%29/Especifica%C3%A7%C3%A3o%20-%20POO.pdf) to access the full specification.
 
-### > Using the application
+### Using the application
 
 To initialize the web application in a fast way, install and execute **[xampp](https://www.apachefriends.org/pt_br/index.html)**. After the installation, configure the MySQL database and apache server.
 
@@ -41,7 +41,7 @@ After completing all the exercises, you'll get to the final page and you'll se a
 
 That's our application! Hope you've enjoyed. :)
 
-### > Credits
+### Credits
 - Eduardo Pennone;
 - Henrique dos Santos (me);
 - Leonardo Rossi; and
