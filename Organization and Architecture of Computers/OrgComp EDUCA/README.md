@@ -8,10 +8,10 @@
 
 Our website **orgCompEduca** (Organization of Computers Education) provides some information (in brazilian portuguese) about **four important topics of organization and architecture of computers**:
 
- - [Cache memory](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computer/OrgComp%20EDUCA#cache-memory);
- - [Mapping functions](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computer/OrgComp%20EDUCA#mapping-functions);
- - [Substitution algorithms](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computer/OrgComp%20EDUCA#substitution-algorithms); and
- - [Write policies](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computer/OrgComp%20EDUCA#write-policies).
+ - [Cache memory](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computers/OrgComp%20EDUCA#cache-memory);
+ - [Mapping functions](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computers/OrgComp%20EDUCA#mapping-functions);
+ - [Substitution algorithms](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computers/OrgComp%20EDUCA#substitution-algorithms); and
+ - [Write policies](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computers/OrgComp%20EDUCA#write-policies).
   
 ### The menu
 Scrolling the site will show you the options menu:
