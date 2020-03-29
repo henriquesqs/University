@@ -32,6 +32,6 @@ Hope you'll enjoy! :)
 
 ### Credits
 Our development group is:
- - Henrique de Souza Q. dos Santos (me);
+ - Henrique de S. Q. dos Santos (me);
  - Paulo H. da Silva ([@pau1o-hs](https://github.com/pau1o-hs)); and
  - Witor M. A. de Oliveira ([@witorMao](https://github.com/witorMao)).
