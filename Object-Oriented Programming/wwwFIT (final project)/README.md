@@ -42,7 +42,7 @@ After completing all the exercises, you'll get to the final page and you'll se a
 That's our application! Hope you've enjoyed. :)
 
 ### > Credits
-Eduardo Pennone;
-Henrique dos Santos (me);
-Leonardo Rossi; and
-[Witor de Oliveira](https://github.com/witormao).
+- Eduardo Pennone;
+- Henrique dos Santos (me);
+- Leonardo Rossi; and
+- [Witor de Oliveira](https://github.com/witormao).
