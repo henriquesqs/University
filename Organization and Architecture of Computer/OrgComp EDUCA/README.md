@@ -2,6 +2,10 @@
 # orgCompEDUCA
 ![header of the website](https://i.imgur.com/qpIf2bs.png)
 
+### Language and Tools
+- HTML
+- CSS
+
 Our website **orgCompEduca** (Organization of Computers Education) provides some information (in brazilian portuguese) about **four important topics of organization and architecture of computers**:
 
  - [Cache memory](https://github.com/henriquesqs/Graduation-codes/new/master/Organization%20and%20Architecture%20of%20Computer/OrgComp%20EDUCA#cache-memory);
