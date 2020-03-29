@@ -1,6 +1,10 @@
 
 # MIPS Calculator
 This is our simple calculator created using assembly mips trough MARS IDE. 
+
+### Language and Tools
+- Assembly MIPS;
+- MARS MIPS Simulator;
   
 ### Introduction
 Our calculator provides you the following math operations:
