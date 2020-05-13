@@ -1,4 +1,4 @@
-# Codes
+# University
 Here are some of my projects that I made when I was a undergraduate student. 
 The **goal** of this repository is to **see (seek) my own evolution**, not only programming, but also learning how to use git.
 
