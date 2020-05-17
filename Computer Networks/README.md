@@ -16,10 +16,10 @@ This project was made by:
 ### How to use
 
 - Certify that you have **make** installed;
-- Use **make** to compile the source code;
+- Use `make all` to compile the source code;
 - Open two terminals;
-- On first terminal, use **make s** to run server side application. You won't see nothing after running this;
-- On second terminal, use **make c** to run client side application. Wait for the welcome message and follow this instructions:
+- On first terminal, use `make s` to run server side application. You won't see nothing after running this;
+- On second terminal, use `make c` to run client side application. Wait for the welcome message and follow this instructions:
   - Enter **0.0.0.0** as ip address;
   - Enter **51000** as port;
   - Enter your **nickname**;
