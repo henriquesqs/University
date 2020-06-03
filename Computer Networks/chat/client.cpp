@@ -46,21 +46,25 @@ int main(int argc, char const *argv[]) {
     int connect = ::connect(socket, (sockaddr *)&server, sizeof(server));
 
     if (connect == -1) {
-        cout << "Can't connect\n";
+        cout << "Can't connect. Is this port already in use?\n";
         return -2;
     }
 
     int send = 0;          // Variable responsible for store results of send()
     string input;          // All user input messages will be stored here
     char buff[4096];       // All messages from the server will be stored here
-    string nickname;       // Variable to store user nickname
+    string nickname;       // Variable to store user's nickname
     int bytesReceived = 0; // Variable responsible to store results of recv()
     char bigNickname[67] = "\nYour nickname is bigger than 20 letters. Please, enter it again: ";
 
-    bytesReceived = recv(socket, buff, 89, 0);      // Receiving welcome message from server
-    cout << "\n" << string(buff, bytesReceived);    // Printing welcome message from server
-    getchar();                                      // Removing '\n' present in buffer from past inputs
-    getline(cin, nickname);                         // Saving client nickname
+    bytesReceived = recv(socket, buff, 89, 0); // Receiving welcome message from server
+
+    cout << "\n"
+         << string(buff, bytesReceived); // Printing welcome message from server
+
+    getchar(); // Removing '\n' present in buffer from past inputs
+
+    getline(cin, nickname); // Saving client's nickname
 
     if (nickname.size() > 20) {
 
@@ -74,13 +78,18 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    ::send(socket, nickname.c_str(), nickname.size(), 0);   // Sending nickname
-    bytesReceived = recv(socket, buff, 40, 0);              // Receiving confirmation message from server
-    cout << "\n" << string(buff, bytesReceived) << "\n";    // Displaying received message
+    ::send(socket, nickname.c_str(), nickname.size(), 0); // Sending nickname
 
-    string aux2;             // Second auxiliar string
-    string auxCompare;       // Aux string to verify server messages. It stores messages received in the program start
-    string serverResponse;   // Stores server response in order to do a later verification
+    bytesReceived = recv(socket, buff, 40, 0); // Receiving confirmation message from server
+    cout << "\n"
+         << string(buff, bytesReceived) << "\n"; // Displaying received message
+
+    string aux2; // Second auxiliar string
+
+    string auxCompare; // Aux string to verify server messages. It stores messages received in the program start
+
+    string serverResponse; // Stores server response in order to do a later verification
+
     bool bigMessage = false; // Flag to know if we're sending a big message (more than 4096 bytes)
 
     while (true) {
