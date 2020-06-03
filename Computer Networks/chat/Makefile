@@ -1,6 +1,6 @@
 all:
-	g++ client.cpp -g -o client.exe -pthread -std=c++11
-	g++ server.cpp -g -o server.exe -pthread -std=c++11
+	g++ serverMultithread.cpp -g -o server.exe -pthread -std=c++11
+	g++ clientMultithread.cpp -g -o client.exe -pthread -std=c++11
 
 s:
 	./server.exe
