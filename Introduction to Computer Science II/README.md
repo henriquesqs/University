@@ -15,5 +15,5 @@ Given a training set and a test set, this program **implements the K-NN Algorith
 ### **[Corretor Automático (Automatic corrector)](https://github.com/henriquesqs/Graduation-codes/blob/master/Introduction%20to%20Computer%20Science%20II/CorretorAutomatico.c)**
 Given a file with some words (simulation of a dictionary), **this program checks if a file** (in this project we openned tweet files) **contains incorrect words** (words that were not found in the dictionary). It was done using Binary Search and Merge Sort.
  
-### **[Recuperação de Imagens (Images recuperation)](https://github.com/henriquesqs/Graduation-codes/blob/master/Introduction%20to%20Computer%20Science%20II/RecuperacaoImagens.c)**
+### **[Recuperação de Imagens (Images recovery)](https://github.com/henriquesqs/Graduation-codes/blob/master/Introduction%20to%20Computer%20Science%20II/RecuperacaoImagens.c)**
 Given a corrupted file, this program seeks and recover the images in this file and output them to the folder. It does do by searching for the header of the images.
