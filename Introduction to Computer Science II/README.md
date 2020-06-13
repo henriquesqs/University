@@ -2,7 +2,7 @@
 Here you can check my first projects at college. Here's a resume of each one of them:
 
 ### **[Calculadora de Expressões Aritméticas (Arithmetic expressions calculator)](https://github.com/henriquesqs/Graduation-codes/tree/master/Introduction%20to%20Computer%20Science%20II/CalculadoraExpressoesAritmeticas)**
-Given an binary arithmetic expression, this calculator uses the [**Shunting Yard Algorithm**](https://brilliant.org/wiki/shunting-yard-algorithm/) to calculate its value. It does so by parsing the expression. It was done using stack and a binary tree.
+Given a binary arithmetic expression, this calculator uses the [**Shunting Yard Algorithm**](https://brilliant.org/wiki/shunting-yard-algorithm/) to calculate its value. It does so by parsing the expression. It was done using stack and a binary tree.
 
 ### **[Gerenciador de Abas de Navegador (Navigator's tab manager)](https://github.com/henriquesqs/Graduation-codes/tree/master/Introduction%20to%20Computer%20Science%20II/GerenciadorAbasNavegador)**
 This program **simulates the navigator's tab manager** by using a double linked list. It was my first time using this Data Structure.
