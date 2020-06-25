@@ -31,18 +31,19 @@ void newConnection(sockaddr_in server_address, int serverSize, int **clientSocke
     }
 
     string msg;
-    string aux; // Auxiliar pra avisar q um cliente desconectou
+    string aux; // Aux to tell that a client disconnected
     string auxToClientResponse;
 
     char buff[4096];
-    char nickname[20];
+    char nickname[50];
     char auxBuff[4096];
     int bytesSend = 0, bytesReceived = 0, bigNick = 0;
     char confirmNick[56] = "Your nickname is registered. Have fun!!\n\nStart to text:";
-    char welcomeMsg[94] = "Hello, there! Welcome to my TCP server chat.\nPlease, enter your nickname (max of 20 letters):";
+    char welcomeMsg[107] = "Hello, there! Welcome to my TCP server chat.\nPlease, provide a nickname by typing /nickname yourNickname.\n";
 
-    memset(nickname, 0, 20); // Emptying nickname buffer
+    memset(nickname, 0, 50); // Emptying nickname buffer
 
+    // Five attempts to send welcome message to client
     for (int count = 0; count < 5; count++) {
 
         bytesSend = send((*clientSocket)[i], welcomeMsg, sizeof(welcomeMsg), 0); // Sending welcome message
@@ -60,6 +61,18 @@ void newConnection(sockaddr_in server_address, int serverSize, int **clientSocke
     if (bytesReceived < 0)
         cout << "Error on receiving user's nickname.\n";
 
+    // client exited the app without entering his nickname
+    else if (bytesReceived == 0) {
+
+        cout << "\nAn attempt to connect was received but user exited without entering his nickname\n";
+
+        // Removing client from the list of connections
+        (*clientSocket)[i] = -1;
+        (*num)--;
+
+        return;
+    }
+
     for (int count = 0; count < 5; count++) {
 
         bytesSend = send((*clientSocket)[i], confirmNick, sizeof(confirmNick), 0); // Sending confirmation of nickname
@@ -74,6 +87,7 @@ void newConnection(sockaddr_in server_address, int serverSize, int **clientSocke
 
     string(nickname, 0, bytesReceived); // Storing client's nickname
 
+    // if (bytesReceived > 0) // otherwise, it will print "~  entered the chat"
     cout << "\n~ "
          << nickname << " entered on chat.\n";
 
@@ -90,6 +104,7 @@ void newConnection(sockaddr_in server_address, int serverSize, int **clientSocke
         // Checking for any errors
         if (bytesReceived == -1) {
             cerr << "Error on receiving message. Stopping.\n";
+
             return;
         }
 
@@ -166,7 +181,8 @@ void newConnection(sockaddr_in server_address, int serverSize, int **clientSocke
                 // Removing client from the list of connections
                 (*clientSocket)[i] = -1;
                 (*num)--;
-                cout << nickname << " disconnected.\n";
+                cout << "\n"
+                     << nickname << " disconnected.\n";
                 memset(nickname, 0, 20); // Emptying nickname buffer
                 return;
             }
