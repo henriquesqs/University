@@ -3,3 +3,5 @@ t1/client
 t1/server
 .vscode/settings.json
 Computer Networks/chat/.vscode
+Computer Networks/chat/client.exe
+Computer Networks/chat/server.exe
