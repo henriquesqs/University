@@ -2,6 +2,7 @@
     Establishing a socket to the server side of application.
 */
 
+#include <algorithm>
 #include <arpa/inet.h>
 #include <iostream>
 #include <netdb.h>
@@ -12,8 +13,61 @@
 #include <sys/types.h>
 #include <thread>
 #include <unistd.h>
+#include <vector>
 
 using namespace std;
+
+class Channel {
+
+    string name;         // name of channel (max of 20 chars)
+    vector<int> members; // vector of members (will store each clientSocket)
+    int admin;
+
+public:
+    // Constructor of Channel class
+    Channel(string name, vector<int> members, int admin) {
+        this->name = name;
+        this->members = members;
+        this->admin = admin;
+    }
+
+    // Method to search by an user in a channel using its socket as key
+    int findMember(int clientSocket) {
+
+        vector<int>::iterator it;
+
+        for (it = this->members.begin(); it < this->members.end(); it++)
+            if (this->members.at(*it) == clientSocket)
+                return *it;
+
+        return -999;
+    }
+
+    // Method to add an user to a channel by adding its socket to members list
+    void addUser(int clientSocket) {
+
+        // Checking if member is already in this channel
+        if (find(this->members.begin(), this->members.end(), clientSocket) != this->members.end()) {
+            cout << "\nMember already in this channel.\n";
+            return;
+        }
+        this->members.push_back(clientSocket); // adds new client to the end of members list of this channel
+    }
+
+    // Method to remove an user from a channel by removing its socket from members list
+    void removeUser(int clientSocket) {
+
+        for (vector<int>::iterator it = this->members.begin(); it < this->members.end(); it++) {
+
+            // Checking if member is in this channel
+            if (this->members.at(*it) == clientSocket) {
+                this->members.erase(it); // deleting client from channel members vector
+                return;
+            }
+        }
+        cout << "\nMember not in this channel.\n";
+    }
+};
 
 void newConnection(sockaddr_in server_address, int serverSize, int **clientSocket, int *num, int i, sockaddr_in client, char host[1025], char service[32]) {
 
@@ -33,7 +87,8 @@ void newConnection(sockaddr_in server_address, int serverSize, int **clientSocke
     string msg;
     string aux; // Aux to tell that a client disconnected
     string auxToClientResponse;
-
+    string channelName;
+    vector<int> members;
     char buff[4096];
     char nickname[50];
     char auxBuff[4096];
@@ -87,7 +142,6 @@ void newConnection(sockaddr_in server_address, int serverSize, int **clientSocke
 
     string(nickname, 0, bytesReceived); // Storing client's nickname
 
-    // if (bytesReceived > 0) // otherwise, it will print "~  entered the chat"
     cout << "\n~ "
          << nickname << " entered on chat.\n";
 
