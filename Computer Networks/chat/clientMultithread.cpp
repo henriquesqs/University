@@ -276,7 +276,8 @@ void threadSend(int socket, int *receiveReturn, string nickname) {
                 return;
             }
 
-            getline(cin, aux2);
+            // getline(cin, aux2);
+            std::getline(std::cin >> std::ws, aux2);
 
             if (cin.eof() && !fsigint) {
                 ::send(socket, "/quit", 4096, 0); // Send the message to server
@@ -443,30 +444,29 @@ int connectToServer() {
     }
 
     // Creating a hint for the server
-    int port = 59000;
-    string ipAddress = "0.0.0.0";
-    // int port;
-    // string ipAddress;
+    int port;
+    string ipAddress;
     sockaddr_in server;
 
-    // // Getting server's ip address
-    // std::cout << "Enter ip address: ";
-    // getchar();
+    // Getting server's ip address
+    std::cout << "Enter ip address: ";
+    std::getline(std::cin >> std::ws, ipAddress);
     // getline(cin, ipAddress);
+    // getchar();
 
-    // if (cin.eof() && !fsigint) {
-    //     std::cout << "Bye!!\n";
-    //     return 0;
-    // }
+    if (cin.eof() && !fsigint) {
+        std::cout << "Bye!!\n";
+        return 0;
+    }
 
-    // // Getting server's port
-    // std::cout << "Enter port: ";
-    // cin >> port;
+    // Getting server's port
+    std::cout << "Enter port: ";
+    cin >> port;
 
-    // if (cin.eof() && !fsigint) {
-    //     std::cout << "Bye!!\n";
-    //     return 0;
-    // }
+    if (cin.eof() && !fsigint) {
+        std::cout << "Bye!!\n";
+        return 0;
+    }
 
     // Adressing some info in order to connect to the server
     server.sin_family = AF_INET;
@@ -488,15 +488,18 @@ int connectToServer() {
     string nickname; // Variable to store user nickname
     char bigNickname[67] = "\nYour nickname is bigger than 50 letters. Please, enter it again: ";
 
+    cout << "\nHello! ";
+
     // Trying to get user's nickname
     while (true) {
 
-        // getchar(); // Removing '\n' present in buffer from past inputs
         cin.clear();
         input.clear();
         nickname.clear();
 
-        getline(cin, input);
+        std::cout << "Before continuing, you'll need to provide a nickname by entering /nickname yourNickname.\n\n";
+
+        std::getline(std::cin >> std::ws, input);
 
         if (cin.eof() && !fsigint) {
             close(socket);
@@ -537,13 +540,9 @@ int connectToServer() {
             help();
             continue;
         }
-
-        std::cout << "\nBefore continuing, you'll need to provide a nickname by entering /nickname yourNickname.\n\n";
     }
 
     ::send(socket, nickname.c_str(), 50, 0); // Sending nickname
-
-    input.clear();
 
     string ch, user, retMessage;
 
@@ -561,7 +560,13 @@ int connectToServer() {
                       << "5) /help - to show help, this can be used wheter you are connected or not\n\n"
                          "Enjoy!\n\n";
 
-            getline(cin, input);
+            cin.clear();
+            input.clear();
+            memset(buff, 0, 4096);
+
+            // getline(cin, input);
+            // getchar();
+            std::getline(std::cin >> std::ws, input);
 
             if (cin.eof() && !fsigint) {
                 std::cout << "Bye!\n";
@@ -723,7 +728,8 @@ int main(int argc, char const *argv[]) {
         cin.clear();
         fsigint = false;
 
-        getline(cin, input);
+        // getline(cin, input);
+        std::getline(std::cin >> std::ws, input);
 
         if (cin.eof() && !fsigint) {
             std::cout << "Bye!!\n";
