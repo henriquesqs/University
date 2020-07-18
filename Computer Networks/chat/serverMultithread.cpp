@@ -472,6 +472,8 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                         }
                     }
 
+                    string kickedUser = (*it).name;
+
                     res = (*c).removeUser(user.substr(6, user.length())); // removing user from channel members list
 
                     std::cout << "\n\n\n resultado da removeUser " << res << "\n\n\n";
@@ -481,7 +483,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                         // std::cout << "Admin " << nickname << " just kicked " << user.substr(6, user.length()) << " from channel \"" << (*c).name << "\".";
 
-                        // Sending to users that a admin has kicked someone out of the channel
+                        // Sending to users that an admin has kicked someone out of the channel
                         for (int j = 0; j < (*c).members.size(); j++) {
 
                             if ((*c).members[j].socket != -1 && (*c).members[j].name.compare((*c).admin.name) != 0) {
@@ -490,7 +492,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                                 for (int count = 0; count < 5; count++) {
 
-                                    bytesSend = send((*c).members[j].socket, temp.name.c_str(), sizeof(nickname), 0);
+                                    bytesSend = send((*c).members[j].socket, kickedUser.c_str(), sizeof(nickname), 0);
 
                                     if (bytesSend < 0)
                                         continue;
