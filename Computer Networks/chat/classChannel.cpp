@@ -8,12 +8,19 @@ using namespace std;
 
 int id;
 
+// All documentation of the functions below are on classChannel.h
+
 Channel::Channel(string name, string nickname, int admin, char *ip) {
+
     struct Member aux;
+
+    // Assigning info of new member
     aux.name = nickname;
     aux.socket = admin;
     aux.isMuted = false;
     aux.host.assign(ip);
+
+    // Assigning info of the new channel
     this->name = name;
     this->members.push_back(aux);
     this->admin = aux;
@@ -37,6 +44,8 @@ vector<Member>::iterator Channel::getMembersIterator(string nickname) {
 int Channel::addUser(string nickname, int clientSocket, char *ip) {
 
     struct Member aux;
+
+    // Assigning new member's info
     aux.name = nickname;
     aux.socket = clientSocket;
     aux.isMuted = false;
@@ -66,6 +75,7 @@ int Channel::removeUser(string nickname) {
         return 1;
     }
 
+    // Member is not on this channel. Returning 0 to indicate error.
     return 0;
 }
 
