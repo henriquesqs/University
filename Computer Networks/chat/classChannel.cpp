@@ -8,12 +8,12 @@ using namespace std;
 
 int id;
 
-Channel::Channel(string name, string nickname, int admin, char host[NI_MAXHOST]) {
+Channel::Channel(string name, string nickname, int admin, char *ip) {
     struct Member aux;
     aux.name = nickname;
     aux.socket = admin;
     aux.isMuted = false;
-    strcpy(aux.host, host);
+    aux.host.assign(ip);
     this->name = name;
     this->members.push_back(aux);
     this->admin = aux;
@@ -34,13 +34,13 @@ vector<Member>::iterator Channel::getMembersIterator(string nickname) {
     return find_if(this->members.begin(), this->members.end(), find_name(nickname));
 }
 
-int Channel::addUser(string nickname, int clientSocket, char host[NI_MAXHOST]) {
+int Channel::addUser(string nickname, int clientSocket, char *ip) {
 
     struct Member aux;
     aux.name = nickname;
     aux.socket = clientSocket;
     aux.isMuted = false;
-    strcpy(aux.host, host);
+    aux.host.assign(ip);
 
     // Checking if member is already in this channel
     if (find_if(this->members.begin(), this->members.end(), find_name(nickname)) != this->members.end()) {
@@ -96,8 +96,7 @@ string Channel::getUserHost(string nickname) {
 
     // Checking if member is in this channel
     if (it != this->members.end()) {
-        string host((*it).host); // Getting user host
-        return host;
+        return (*it).host;
     }
     return "not found";
 }

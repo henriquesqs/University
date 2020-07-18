@@ -19,21 +19,35 @@
 
 using namespace std;
 
-void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, int currentClient, string nick, vector<thread> *connectionsList, char host[NI_MAXHOST]) {
+void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, int currentClient, string nick, vector<thread> *connectionsList, char *ip) {
 
-    char buff[4096];
-    char auxBuff[4096];
-    char nickname[50];
-    int bytesSend = 0, bytesReceived = 0;
-    char confirmNick[56] = "Your nickname is registered. Have fun!!\n\nStart to text:";
-    char welcomeMsg[46] = "Hello, there! Welcome to my TCP server chat.\n";
+    /*
+        ERRORS:
+
+        0: You can't kick yourself.
+        1: You're not connected to a channel to use this command.
+        2: This nickname could not be found on this channel.
+        3: This command is admin only.
+
+        SUCCESS:
+        0: User successfully kicked from the channel!
+    */
+
+    char buff[4096];    // var to hold messages from recv and send functions
+    char auxBuff[4096]; // var aux to buff
+    char nickname[50];  // var to store nickname of the client who sent a message
+
+    int bytesSend = 0, bytesReceived = 0; // vars to control bytes from recv and send functions
     string msg, aux, auxToClientResponse;
 
-    Member temp;
+    char confirmNick[56] = "Your nickname is registered. Have fun!!\n\nStart to text:";
+    char welcomeMsg[46] = "Hello, there! Welcome to my TCP server chat.\n";
+
+    Member temp; // "temp" will store the info of the client who sent the message
     temp.name = (*c).members[currentClient].name;
     temp.socket = (*c).members[currentClient].socket;
 
-    nick.copy(nickname, nick.size());
+    nick.copy(nickname, nick.size()); // saving current client nickname to a new var
 
     for (int count = 0; count < 5; count++) {
 
@@ -59,7 +73,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
         }
     }
 
-    std::cout << "\n~ " << nickname << " entered on channel " << (*c).name << "\n";
+    std::cout << "\n~ " << nickname << " entered on channel " << (*c).name << ".\n";
 
     while (true) {
 
@@ -77,12 +91,17 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
             return;
         }
 
+        else if (bytesReceived == 0) {
+            // std::cout << "Server is receiving nothing";
+            continue;
+        }
+
         else if (bytesReceived > 0) {
 
-            string user = buff; // var to store input
+            string user = buff; // var to store target user of sent command
 
             if (strcmp(buff, "User kicked") == 0) {
-                (*connectionsList).erase((*connectionsList).begin() + currentClient); //deletando a thread da lista de threads
+                (*connectionsList).erase((*connectionsList).begin() + currentClient); // removing client thread from threads lists
                 // std::cout << "Admin " << (*c).getAdmin().name << " just kicked " << nickname << " from channel \"" << (*c).name << "\".";
                 return;
             }
@@ -161,6 +180,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                 // User is not admin of this channel so this command can't be used
                 else {
 
+                    // Sending his/she nickname
                     for (int count = 0; count < 5; count++) {
 
                         bytesSend = send((*c).members[currentClient].socket, nickname, sizeof(nickname), 0);
@@ -173,6 +193,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                         }
                     }
 
+                    // Sending error message
                     for (int count = 0; count < 5; count++) {
 
                         // bytesSend = send((*c).members[currentClient].socket, "ERROR. This command is admin only.", 55, 0);
@@ -229,7 +250,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                     aux = "You've been unmuted!";
 
-                    // Sending to user that he/she has been unmute
+                    // Sending to user that he/she has been unmuted
                     for (int count = 0; count < 5; count++) {
 
                         bytesSend = send((*it).socket, (*it).name.c_str(), (*it).name.size(), 0);
@@ -325,11 +346,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                 // Checks if user is admin of this channel
                 else if (temp.name.compare((*c).getAdmin().name) == 0) { // user is on channel and its an admin
 
-                    std::cout << "\nnome de quem o admin vai ver o IP: " << (*it).name;
-
-                    string userIp = (*c).getUserHost((*it).name);
-
-                    std::cout << "\nip do fulano: " << userIp.c_str() << "\n";
+                    string userIp = (*c).getUserHost((*it).name); // Getting user's ip
 
                     // Sending requested information only to admin
                     for (int count = 0; count < 5; count++) {
@@ -346,9 +363,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                     for (int count = 0; count < 5; count++) {
 
-                        // bytesSend = send(temp.socket, "This nickname could not be found on this channel.", 55, 0);
                         aux = "Endereço IP do usuário " + (*it).name + " é " + userIp;
-                        // bytesSend = send(temp.socket, aux.c_str(), aux.size(), 0);
                         bytesSend = send(temp.socket, aux.c_str(), aux.size(), 0);
 
                         if (bytesSend < 0)
@@ -393,18 +408,6 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
             // implementation of /kick
             else if (strncmp(buff, "/kick", 5) == 0) {
 
-                /*
-                    ERRORS:
-
-                    0: You can't kick yourself.
-                    1: You're not connected to a channel to use this command.
-                    2: This nickname could not be found on this channel.
-                    3: This command is admin only.
-
-                    SUCCESS:
-                    0: User successfully kicked from the channel!
-                */
-
                 int res = 0; // var to store results of the next operation
 
                 vector<Member>::iterator it = (*c).getMembersIterator(user.substr(6, user.length()));
@@ -443,8 +446,6 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                     aux = "You've been kicked!";
 
-                    std::cout << " nome de quem vai se kickado: " << (*it).name;
-
                     // Sending to user that he/she has been kicked from channel
                     for (int count = 0; count < 5; count++) {
 
@@ -462,8 +463,6 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                         bytesSend = send((*it).socket, aux.c_str(), 4096, 0);
 
-                        std::cout << "\n\n\nresultado do send pro cliente avisando q ele foi kickado " << bytesSend << "\n\n\n";
-
                         if (bytesSend < 0)
                             continue;
                         else {
@@ -476,8 +475,6 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                     res = (*c).removeUser(user.substr(6, user.length())); // removing user from channel members list
 
-                    std::cout << "\n\n\n resultado da removeUser " << res << "\n\n\n";
-
                     // User successfully removed
                     if (res == 1) {
 
@@ -489,7 +486,6 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                             if ((*c).members[j].socket != -1 && (*c).members[j].name.compare((*c).admin.name) != 0) {
 
                                 // sending to clients that one of them diconnected from the server
-
                                 for (int count = 0; count < 5; count++) {
 
                                     bytesSend = send((*c).members[j].socket, kickedUser.c_str(), sizeof(nickname), 0);
@@ -550,7 +546,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                 }
             }
 
-            //implementation of /quit command
+            // implementation of /quit command
             else if (strcmp(buff, "/quit") == 0) {
 
                 for (int j = 0; j < (*c).members.size(); j++) {
@@ -617,16 +613,14 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                     }
                 }
 
-                // Removing client from the list of connections
-                int ver = (*c).removeUser(temp.name);
+                int ver = (*c).removeUser(temp.name); // Removing client from the list of connections
+
                 std::cout << temp.name << " disconnected.\n";
-                std::cout << "\n\nadmin on" << (*c).name << ": " << (*c).getAdmin().name << "\n"
-                          << "ver = " << ver << "\n\n";
-                // memset(nickname, 0, 50); // Emptying nickname buffer
+
                 return;
             }
 
-            // Implementation of /ping command
+            // implementation of /ping command
             else if (strcmp(buff, "/ping") == 0) {
 
                 for (int count = 0; count < 5; count++) {
@@ -656,10 +650,8 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                 }
             }
 
-            //normal messages
+            // normal messages
             else {
-
-                std::cout << "\nentrou na parte de msgs normais\n";
 
                 // User is not muted so can send messages
                 if ((*c).isMuted(temp.name) == 0) {
@@ -691,13 +683,15 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                         bytesReceived = recv(temp.socket, buff, 4096, 0); // Receiving
 
                         if (bytesReceived < 0)
-                            std::cout << "Error on getting a server response.\n\n";
+                            std::cout
+                                << "Error on getting a server response.\n\n";
 
-                        else if (bytesReceived == 0) {
-                            ;
-                        }
+                        // else if (bytesReceived == 0) {
+                        //     std::cout << "\nReceiving nothing\n";
+                        //     break;
+                        // }
 
-                        else {
+                        else { // bytesReceived > 0
                             strcpy(auxBuff, buff);
                             msg += buff;
 
@@ -724,7 +718,6 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                     strcpy(auxBuff, buff);
 
                     // Sending received message for all the clients except the one who send the current message
-
                     for (int j = 0; j < (*c).members.size(); j++) {
 
                         if ((*c).members[j].socket != -1 || (*c).members[j].name.compare(temp.name) == 0) {
@@ -785,36 +778,42 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
     }
 }
 
-void newChannel(Channel *c, sockaddr_in server_address, sockaddr_in client, string nickname, deque<Channel> *channels, char host[NI_MAXHOST]) {
+void newChannel(Channel *c, sockaddr_in server_address, sockaddr_in client, string nickname, deque<Channel> *channels, char *ip) {
 
-    vector<thread> threads; // Will store the threads created to the new connections on the channel
-    int numConnections = 0; //represents the number of clients connected to this channel
+    vector<thread> threads; // Will store the created threads to the new connection on channel
+    int numConnections = 0; // Represents the number of connected clients on this channel
 
     while (true) {
 
-        // Verifying the number of threads created by this thread newChannel and the member number in this channel.
+        // Verifying the number of created threads by this thread (newChannel) and the members number in this channel.
         // If they are different them create another thread to handle the new connection
 
         if ((*c).members.size() < SOMAXCONN && (*c).numConnections < (*c).members.size()) {
-            //adjusting the nickname to create the connection
-            nickname = (*c).members[(*c).members.size() - 1].name;
+
+            nickname = (*c).members[(*c).members.size() - 1].name; //adjusting the nickname to create the connection
+
             // Creating one thread for the requisition that just was accepted
-            threads.push_back(thread(newConnection, server_address, client, c, (*c).members.size() - 1, nickname, &threads, host));
+            threads.push_back(thread(newConnection, server_address, client, c, (*c).members.size() - 1, nickname, &threads, ip));
+
             // Detach the new thread from the main thread
             threads[threads.size() - 1].detach();
+
+            // Increases the num of connected members
             (*c).increaseNumConnections();
+
             numConnections++;
         }
 
         if (numConnections > (*c).members.size()) {
-            std::cout << "\n\nmostrando os membros atuais do canal " << (*c).name << "\n\n";
+
+            std::cout << "\nShowing current connected members on channel " << (*c).name << ":\n\n";
             for (int i = 0; i < (*c).members.size(); i++) {
                 std::cout << (*c).members[i].name << "\n";
             }
             numConnections--;
         }
 
-        //the channel dont have any members, so close it
+        // Channel doesnt have any members, so close it
         if ((*c).numConnections == 0) {
             for (deque<Channel>::iterator ptr = (*channels).begin(); ptr < (*channels).end(); ptr++) {
                 if ((*ptr).name.compare((*c).name) == 0) {
@@ -822,7 +821,7 @@ void newChannel(Channel *c, sockaddr_in server_address, sockaddr_in client, stri
                     break;
                 }
             }
-            std::cout << "\n\nChannel " << (*c).name << " disolved!\n\n";
+            std::cout << "\n\nChannel " << (*c).name << " disolved!\n";
             return;
         }
     }
@@ -831,7 +830,7 @@ void newChannel(Channel *c, sockaddr_in server_address, sockaddr_in client, stri
 int main(int argc, char const *argv[]) {
 
     // Creating a sockaddr_in which describes the internet protocol version 4 (ipv4)
-    int port = 59000;
+    int port = 60000;
     string ipAddress = "0.0.0.0";
 
     sockaddr_in server_address;
@@ -877,8 +876,8 @@ int main(int argc, char const *argv[]) {
 
     deque<Channel> channels; //list of channels
 
-    bool exists;
-    int bytesReceived;
+    bool exists;       // flag to control if a channel already exists
+    int bytesReceived; // var to control num of received bytes from recv function
     string channelName, auxID;
 
     vector<thread> channelThreads; // Will store the threads created to the new connections on the server
@@ -905,8 +904,12 @@ int main(int argc, char const *argv[]) {
             std::cout << host << " connected on " << service << "\n";
         else {
             inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
+
+            // Getting user IP
+            getpeername(socket, (sockaddr *)&client, &clientSize);
+
             std::cout << "\n"
-                      << host << " connected on port " << ntohs(server_address.sin_port) << "\n";
+                      << inet_ntoa(client.sin_addr) << " connected on port " << ntohs(server_address.sin_port) << "\n";
         }
 
         // Receiving the nickname of the client
@@ -940,15 +943,17 @@ int main(int argc, char const *argv[]) {
                     send(clientSocket, buffer, 4096, 0);
                 }
 
-                strcpy(buffer, "terminou");
+                strcpy(buffer, "terminou"); // sending a flag message indicating that the reading ended
                 send(clientSocket, buffer, 4096, 0);
             }
 
             // Checking if user entered correctly /join command
             else if (strlen(buffer) > 7 && (strncmp(buffer, "/join &", 7) == 0 || strncmp(buffer, "/join #", 7) == 0)) {
 
-                int k = 0;
-                int size = channels.size();
+                int k = 0; // iterable var
+
+                int size = channels.size(); // var to store how many clients are connected to the channel
+
                 exists = false;
                 channelName = buffer;
                 channelName.erase(0, 6); // Leaving only the name of the channel in the string
@@ -964,7 +969,7 @@ int main(int argc, char const *argv[]) {
                 // If channel already exists
                 if (exists) {
 
-                    if (channels[k].addUser(nickname, clientSocket, host)) {
+                    if (channels[k].addUser(nickname, clientSocket, inet_ntoa(client.sin_addr))) {
                         ::send(clientSocket, "Client successfully added!\n", 28, 0);
                         break;
                     }
@@ -982,7 +987,7 @@ int main(int argc, char const *argv[]) {
                 else if (!exists) {
 
                     // Creating and adding aux channel to deque
-                    Channel aux(channelName, nickname, clientSocket, host);
+                    Channel aux(channelName, nickname, clientSocket, inet_ntoa(client.sin_addr));
                     channels.push_back(aux);
 
                     // Calling a function that will create a thread for the new channel

@@ -11,7 +11,7 @@ struct Member {
     int socket;
     string name;
     bool isMuted;
-    char host[NI_MAXHOST];
+    string host;
 
     bool operator()(Member &m) const {
         if (name == m.name && socket == m.socket)
