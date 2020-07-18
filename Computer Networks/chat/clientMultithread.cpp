@@ -33,17 +33,17 @@ int quit() {
         cin >> c;
 
         if (c == 'y' || c == 'Y' || (cin.eof() && !fsigint)) {
-            cout << "Bye!!\n";
+            std::cout << "Bye!!\n";
             return 0;
         }
 
         else if (c == 'n' || c == 'N') {
-            cout << "Ok. Type /help if you want to see your options again.\n";
+            std::cout << "Ok. Type /help if you want to see your options again.\n";
             return 1;
         }
 
         else {
-            cout << "Not valid. Press 'y' if you want to leave the application or 'n' otherwise.\n";
+            std::cout << "Not valid. Press 'y' if you want to leave the application or 'n' otherwise.\n";
             continue;
         }
     }
@@ -51,66 +51,129 @@ int quit() {
 
 void help() {
 
-    cout << "Here are the commands that you can use to interact with this application:\n\n"
-         << "1) /connect - this is used to connect to a server, you will need the ip and the port that the server is listening\n"
-         << "2) /nickname yourNickname - you need to provide your nickname before sending messages\n"
-         << "3) /ping - you can use this to test if you are connected to a server, if everything is fine, you will see a pong message on your screen sent by the server\n"
-         << "4) /quit or press ctrl+D on your keyboard - when you want to disconnect from the server, you can use this commands\n"
-         << "5) /help - to show help, this can be used wheter you are connected or not\n\n"
-         << "P.S.: When connected to a server, to send messages and use this commands, first provide your nickname and, if everything goes right, you'll be able to send messages. To do so, type what you want, press enter and then type /send and press enter again.\n\n"
-            "Enjoy!\n\n";
+    std::cout << "Here are the commands that you can use to interact with this application:\n\n"
+              << "1) /connect - this is used to connect to a server, you will need the ip and the port that the server is listening\n"
+              << "2) /nickname yourNickname - you need to provide your nickname before sending messages\n"
+              << "3) /ping - you can use this to test if you are connected to a server, if everything is fine, you will see a pong message on your screen sent by the server\n"
+              << "4) /quit or press ctrl+D on your keyboard - when you want to disconnect from the server, you can use this commands\n"
+              << "5) /help - to show help, this can be used wheter you are connected or not\n\n"
+              << "P.S.: When connected to a server, to send messages and use this commands, first provide your nickname and, if everything goes right, you'll be able to send messages. To do so, type what you want, press enter and then type /send and press enter again.\n\n"
+                 "Enjoy!\n\n";
     return;
 }
 
 void my_handler(int s) {
 
     if (s == SIGINT) {
-        cout << "\nCaught signal 2 (SIGINT). Do you want to exit? If so, type /quit.\n";
+        std::cout << "\nCaught signal 2 (SIGINT). Do you want to exit? If so, type /quit.\n";
         fsigint = true;
         fflush(stdin); // clearing stdin
         cin.clear();   // clearing cin
 
     } else
-        cout << "\nCaught signal " << s << "\n";
+        std::cout << "\nCaught signal " << s << "\n";
 }
 
-void threadReceive(int socket, string nicknameClient) {
+void threadReceive(int socket, string nicknameClient, int *receiveReturn) {
 
     char buff[4096]; // All messages from the server will be stored here
     char nickname[50];
     int bytesReceived = 0; // Variable responsible to store results of recv()
     string serverResponse; // Stores server response in order to do a later verification
-    string aux = "You disconnected! Bye.";
 
     while (true) {
 
         memset(nickname, 0, 50); // Cleaning the buffer
+        memset(buff, 0, 4096);   // Cleaning the buffer
 
         bytesReceived = recv(socket, nickname, sizeof(nickname), 0); // Receiving nickname from server
 
         if (bytesReceived < 0)
-            cout << "Error on getting a server response.\n\n";
+            std::cout << "Error on getting a server response.\n\n";
 
         else {
             if (bytesReceived > 0) {
 
-                // if the nickname received is the same as current client then is /ping or /quit command
+                // if the nickname received is the same as current client then is /ping or /quit or /kick or /whois command
                 if (nicknameClient.compare(nickname) == 0) {
 
                     memset(buff, 0, 4096); // Cleaning the buffer
 
                     bytesReceived = recv(socket, buff, 4096, 0); // Receiving message from server
 
+                    std::cout << "\n\n\no que o cliente tá recebendo sempre msm nick\n"
+                              << "nick: " << nickname << "\nmsg:" << buff << "\n\n\n";
+
                     // Checks if user entered CTRL+D or wants to quit
-                    if (strcmp(buff, aux.c_str()) == 0) {
-                        cout << aux << "\n";
+                    if (strcmp(buff, "You disconnected! Bye.") == 0) {
+                        std::cout << "You disconnected! Bye.\n";
+                        return;
+                    }
+
+                    // Checking if user is muted
+                    else if (strcmp(buff, "You're muted...") == 0) {
+                        std::cout << "You're muted...\n\n";
+                        memset(buff, 0, 4096); // Cleaning the buffer
+                        continue;
+                    }
+
+                    else if (strcmp(buff, "You've been muted!") == 0) {
+                        std::cout << "You've been muted!\n\n";
+                        memset(buff, 0, 4096); // Cleaning the buffer
+                        continue;
+                    }
+
+                    else if (strcmp(buff, "You've been unmuted!") == 0) {
+                        std::cout << "You've been unmuted!\n\n";
+                        memset(buff, 0, 4096); // Cleaning the buffer
+                        continue;
+                    }
+
+                    else if (strcmp(buff, "You've been kicked!") == 0) {
+                        std::cout << "You've been kicked! Bye.\n";
+                        ::send(socket, "User kicked", 4096, 0); // Send the message to server
+                        *receiveReturn = 1;
+                        memset(buff, 0, 4096); // Cleaning the buffer
+
                         return;
                     }
 
                     // Checks if user is testing connection with server
                     else if (strcmp(buff, "pong") == 0) {
-                        cout << "pong\n";
+                        std::cout << "pong\n";
                         memset(buff, 0, 4096); // Cleaning the buffer
+                    }
+
+                    else if (strcmp(buff, "ERROR0") == 0) {
+                        std::cout << "You can't kick yourself.\n\n";
+                        continue;
+                    }
+
+                    else if (strcmp(buff, "ERROR1") == 0) {
+                        std::cout << "You're not connected to a channel to use this command.\n\n";
+                        continue;
+                    }
+
+                    else if (strcmp(buff, "ERROR2") == 0) {
+                        std::cout << "This nickname could not be found on this channel.\n\n";
+                        continue;
+                    }
+
+                    else if (strcmp(buff, "ERROR3") == 0) {
+                        std::cout << "This command is admin only.\n\n";
+                        continue;
+                    }
+
+                    else if (strcmp(buff, "SUCCES") == 0) {
+                        std::cout << "User successfully kicked from the channel!\n\n";
+                        continue;
+                    }
+
+                    else if (strncmp(buff, "Endereço IP do usuário", 22) == 0) {
+                        std::cout << buff << "\n\n";
+                        // se começar a dar erro é pq por algum motivo eu corrigi com esses dois "\n\n"
+                        memset(buff, 0, 4096); // Cleaning the buffer
+                        continue;
                     }
                 }
 
@@ -120,8 +183,22 @@ void threadReceive(int socket, string nicknameClient) {
                     memset(buff, 0, 4096);                       // Cleaning the buffer
                     bytesReceived = recv(socket, buff, 4096, 0); // Receiving message from server
 
+                    std::cout << "\n\n\no que o cliente tá recebendo sempre msg normal:\n"
+                              << "nick: " << nickname << "\nmsg:" << buff << "\n\n\n";
+
                     if (strcmp(buff, " disconnected!\n") == 0)
-                        cout << nickname << buff << "\n\n";
+                        std::cout << nickname << buff << "\n\n";
+
+                    else if (strcmp(buff, " kicked!\n") == 0)
+                        std::cout << nickname << buff << "\n\n";
+
+                    else if (strcmp(buff, "You've been muted!") == 0) {
+                        std::cout << "You've been muted!\n\n";
+                    }
+
+                    else if (strcmp(buff, "You've been unmuted!") == 0) {
+                        std::cout << "You've been unmuted!\n\n";
+                    }
 
                     else {
                         while (buff[4095] == 4) {
@@ -135,14 +212,14 @@ void threadReceive(int socket, string nicknameClient) {
                             bytesReceived = recv(socket, buff, 4096, 0); // Receiving message from server
 
                             if (bytesReceived == -1)
-                                cout << "Error on getting a server response.\n\n";
+                                std::cout << "Error on getting a server response.\n\n";
                         }
 
                         serverResponse += buff;
 
                         // Printing the messages received fom the server
-                        cout << "\n> " << nickname << ": ";
-                        cout << serverResponse + "\n";
+                        std::cout << "\n> " << nickname << ": ";
+                        std::cout << serverResponse + "\n";
                     }
                 }
             }
@@ -150,11 +227,12 @@ void threadReceive(int socket, string nicknameClient) {
     }
 }
 
-void threadSend(int socket) {
+void threadSend(int socket, int *receiveReturn, string nickname) {
 
     int send = 0; // Variable responsible for store results of send()
     string input; // All user input messages will be stored here
     string aux2;  // Second auxiliar string
+    string user;  // String to store user that admin wants to kick
 
     char buff[4096];   // All messages from the server will be stored here
     string auxCompare; // Aux string to verify server messages. It stores messages received in the program start
@@ -175,6 +253,14 @@ void threadSend(int socket) {
         bigMessage = false;
         bytesReceived = 0;
         fsigint = false;
+        user.clear();
+
+        //the current client has been kicked form the channel
+        if (*receiveReturn == 1) {
+            std::cout << "\n\npercebeu q foi kikado - thread send\n\n";
+            // ::send(socket, "User kicked", 4096, 0); // Send the message to server
+            return;
+        }
 
         // Now, client app will read everything until it founds a /send, which its the command to send the message.
         // This allows the user to send more than a paragraph per message
@@ -183,11 +269,18 @@ void threadSend(int socket) {
             fsigint = false;
             fflush(stdin);
             cin.clear();
+
+            if (*receiveReturn == 1) {
+                // std::cout << "\n\npercebeu q foi kikado - thread send\n\n";
+                ::send(socket, "User kicked", 4096, 0); // Send the message to server
+                return;
+            }
+
             getline(cin, aux2);
 
             if (cin.eof() && !fsigint) {
                 ::send(socket, "/quit", 4096, 0); // Send the message to server
-                // cout << "You disconnected! Bye.";
+                // std::cout << "You disconnected! Bye.";
                 input += "/quit";
                 break;
                 // return;
@@ -200,7 +293,7 @@ void threadSend(int socket) {
 
             else {
                 if (input.size() == 0) {
-                    cout << "You can't send nothing, please write something.\n";
+                    std::cout << "You can't send nothing, please write something.\n";
                     continue;
                 }
                 input.erase(input.size() - 1); // Removing the last "\n" that was added before
@@ -208,11 +301,74 @@ void threadSend(int socket) {
             }
         }
 
-        cout << "\n< You: " << input << "\n\n";
+        std::cout << "\n< You: " << input << "\n\n";
 
+        // User is trying to get help
         if (input.compare("/help") == 0) {
             help();
             continue;
+        }
+
+        else if (strncmp(input.c_str(), "/kick", 5) == 0) {
+
+            user = input.substr(6, input.length()); // user to be kicked
+
+            // Checks if user is trying to self kick
+            if (user.compare(nickname.c_str()) == 0) {
+                std::cout << "You can't kick yourself...\n\n";
+                continue;
+            }
+
+            // Checks if user is trying to enter an empty nickname
+            else if (all_of(user.begin(), user.end(), ::isspace)) {
+                std::cout << "Invalid nickname. Please, do not provide an empty nickname. Try again.\n\n";
+                continue;
+            }
+        }
+
+        else if (strncmp(input.c_str(), "/mute", 5) == 0) {
+
+            user = input.substr(6, input.length()); // user to be muted
+
+            // Checks if user is trying to self mute
+            if (user.compare(nickname.c_str()) == 0) {
+                std::cout << "You can't mute yourself...\n\n";
+                continue;
+            }
+
+            // Checks if user is trying to enter an empty nickname
+            if (all_of(user.begin(), user.end(), ::isspace)) {
+                std::cout << "Invalid nickname. Please, do not provide an empty nickname. Try again.\n\n";
+                continue;
+            }
+        }
+
+        else if (strncmp(input.c_str(), "/unmute", 7) == 0) {
+
+            user = input.substr(8, input.length()); // user to be muted
+
+            // Checks if user is trying to self unmute
+            if (user.compare(nickname.c_str()) == 0) {
+                std::cout << "You can't unmute yourself...\n\n";
+                continue;
+            }
+
+            // Checks if user is trying to enter an empty nickname
+            if (all_of(user.begin(), user.end(), ::isspace)) {
+                std::cout << "Invalid nickname. Please, do not provide an empty nickname. Try again.\n\n";
+                continue;
+            }
+        }
+
+        else if (strncmp(input.c_str(), "/whois", 6) == 0) {
+
+            user = input.substr(7, input.length()); // user to be kicked
+
+            // Checks if user is trying to enter an empty nickname
+            if (all_of(user.begin(), user.end(), ::isspace)) {
+                std::cout << "Invalid nickname. Please, do not provide an empty nickname. Try again.\n\n";
+                continue;
+            }
         }
 
         // Checking if it's a big message (more than 4096 bytes)
@@ -233,7 +389,7 @@ void threadSend(int socket) {
             send = ::send(socket, buff, 4096, 0); // Send the message to server
 
             if (send == -1) {
-                cout << "Couldn't send to server. Maybe you should try again.";
+                std::cout << "Couldn't send to server. Maybe you should try again.";
                 continue;
             }
 
@@ -243,7 +399,7 @@ void threadSend(int socket) {
             serverResponse += buff;
 
             if (bytesReceived == -1)
-                cout << "Error on getting a server response.\n\n";
+                std::cout << "Error on getting a server response.\n\n";
 
             input.erase(0, 4095); // Erases first 4096 bytes of auxBuffer
         }
@@ -270,15 +426,9 @@ void threadSend(int socket) {
 
         // User wants to quit the application
         if (input.compare("/quit") == 0) {
+            *receiveReturn = 0;
             return;
         }
-
-        memset(buff, 0, 4096); // Cleaning the buffer send = 0;
-        bigMessage = false;
-        auxCompare.clear();
-        serverResponse.clear();
-        input.clear();
-        aux2.clear();
     }
 }
 
@@ -288,33 +438,35 @@ int connectToServer() {
     int socket = ::socket(AF_INET, SOCK_STREAM, 0);
 
     if (socket == -1) {
-        cout << "Can't create a socket\n";
+        std::cout << "Can't create a socket\n";
         return -1;
     }
 
     // Creating a hint for the server
-    int port;
-    string ipAddress;
+    int port = 59000;
+    string ipAddress = "0.0.0.0";
+    // int port;
+    // string ipAddress;
     sockaddr_in server;
 
-    // Getting server's ip address
-    cout << "Enter ip address: ";
-    getchar();
-    getline(cin, ipAddress);
+    // // Getting server's ip address
+    // std::cout << "Enter ip address: ";
+    // getchar();
+    // getline(cin, ipAddress);
 
-    if (cin.eof() && !fsigint) {
-        cout << "Bye!!\n";
-        return 0;
-    }
+    // if (cin.eof() && !fsigint) {
+    //     std::cout << "Bye!!\n";
+    //     return 0;
+    // }
 
-    // Getting server's port
-    cout << "Enter port: ";
-    cin >> port;
+    // // Getting server's port
+    // std::cout << "Enter port: ";
+    // cin >> port;
 
-    if (cin.eof() && !fsigint) {
-        cout << "Bye!!\n";
-        return 0;
-    }
+    // if (cin.eof() && !fsigint) {
+    //     std::cout << "Bye!!\n";
+    //     return 0;
+    // }
 
     // Adressing some info in order to connect to the server
     server.sin_family = AF_INET;
@@ -325,27 +477,24 @@ int connectToServer() {
     int connect = ::connect(socket, (sockaddr *)&server, sizeof(server));
 
     if (connect == -1) {
-        cout << "Can't connect\n";
+        std::cout << "Can't connect\n";
         return -2;
     }
 
-    int send = 0; // Variable responsible for storing results of send()
-    string input; // All user input messages will be stored here
+    string input;          // All user input messages will be stored here
+    int bytesReceived = 0; // Variable responsible to store results of recv()
 
     char buff[4096]; // All messages from the server will be stored here
     string nickname; // Variable to store user nickname
-
-    int bytesReceived = 0; // Variable responsible to store results of recv()
     char bigNickname[67] = "\nYour nickname is bigger than 50 letters. Please, enter it again: ";
-
-    bytesReceived = recv(socket, buff, 107, 0); // Receiving welcome message from server
-
-    cout << "\n" + string(buff, bytesReceived); // Printing welcome message from server
-
-    getchar(); // Removing '\n' present in buffer from past inputs
 
     // Trying to get user's nickname
     while (true) {
+
+        // getchar(); // Removing '\n' present in buffer from past inputs
+        cin.clear();
+        input.clear();
+        nickname.clear();
 
         getline(cin, input);
 
@@ -361,40 +510,21 @@ int connectToServer() {
 
             // Checks if user entered a nickname full of spaces
             if (all_of(nickname.begin(), nickname.end(), ::isspace)) {
-                cout << "Invalid nickname. Please, do not provide an empty nickname. Try again.\n\n";
+                std::cout << "Invalid nickname. Please, do not provide an empty nickname. Try again.\n\n";
                 continue;
             }
 
             // Checking nickname length (must contain less than 50 letters)
             else if (nickname.size() > 50) {
-
-                while (true) {
-
-                    fsigint = false;
-
-                    cout << bigNickname; // Printing error message
-
-                    fflush(stdin);
-                    cin.clear();
-                    getline(cin, nickname); // Saving new client's nickname
-
-                    if (cin.eof() && !fsigint) {
-                        cout << "Bye!\n";
-                        close(socket);
-                        return 0;
-                    }
-
-                    if (nickname.size() <= 50)
-                        break;
-                }
-            }
-
-            break;
+                std::cout << bigNickname; // Printing error message
+                continue;
+            } else
+                break;
         }
 
         // Checks if user is trying to quit the application
         else if ((input.compare("/quit")) == 0) {
-            cout << "You are currently connected. Do you want to leave the application? Press 'y' if so or 'n' otherwise.\n";
+            std::cout << "You are currently connected. Do you want to leave the application? Press 'y' if so or 'n' otherwise.\n";
             if (quit() == 0) {
                 close(socket);
                 return 0;
@@ -405,29 +535,168 @@ int connectToServer() {
         // Checks if user is trying to get help
         else if ((input.compare("/help")) == 0) {
             help();
+            continue;
         }
 
-        cout << "\nBefore continuing, you'll need to provide a nickname by entering /nickname yourNickname.\n\n";
+        std::cout << "\nBefore continuing, you'll need to provide a nickname by entering /nickname yourNickname.\n\n";
     }
 
-    int bytesSend = 0;
-    bytesSend = ::send(socket, nickname.c_str(), nickname.size(), 0); // Sending nickname
+    ::send(socket, nickname.c_str(), 50, 0); // Sending nickname
 
-    if (bytesSend > 0)
-        bytesReceived = recv(socket, buff, 56, 0); // Receiving confirmation message from server
+    input.clear();
 
-    if (bytesReceived > 0) {
+    string ch, user, retMessage;
 
-        cout << "\n" + string(buff, bytesReceived) << "\n"; // Displaying received message
+    int receiveReturn = 2;
 
-        thread sending(threadSend, socket);
-        thread receiving(threadReceive, socket, nickname);
+    while (true) {
 
-        sending.join();
-        receiving.join();
+        // Trying to get a channel name to join
+        while (true) {
+
+            std::cout << "Here are the commands that you can use to interact with this application:\n\n"
+                      << "1) /join *nameOfTheChannel - (replace the * with # or &)\n"
+                      << "2) /list to show the channels running on the server\n"
+                      << "4) /quit or press ctrl+D on your keyboard - when you want to disconnect from the server, you can use this commands\n"
+                      << "5) /help - to show help, this can be used wheter you are connected or not\n\n"
+                         "Enjoy!\n\n";
+
+            getline(cin, input);
+
+            if (cin.eof() && !fsigint) {
+                std::cout << "Bye!\n";
+                close(socket);
+                return 0;
+            }
+
+            else if (input.compare("/list") == 0) {
+                std::cout << "\nCurrent available channels:\n\n";
+                strcpy(buff, input.c_str());
+
+                ::send(socket, buff, 4096, 0);
+
+                bytesReceived = recv(socket, buff, 4096, 0);
+
+                int i = 0;
+                string canal = buff;
+                while (strcmp(buff, "terminou") != 0) {
+                    i++;
+                    std::cout << "\t" << i << ") " << canal << "\n";
+                    bytesReceived = recv(socket, buff, 4096, 0);
+                    canal = buff;
+                }
+
+                memset(buff, 0, 4096);
+                std::cout << "\n";
+                break;
+
+            }
+
+            // Checks if user is trying to join a channel
+            else if (input.size() > 6 && (strncmp(input.c_str(), "/join", 5) == 0 || strncmp(input.c_str(), "/join", 5) == 0)) {
+
+                ch = input.substr(6, input.length());
+
+                // Checks if user entered a channel name full of spaces
+                if (all_of(ch.begin(), ch.end(), ::isspace)) {
+                    std::cout << "Invalid channel name. Please, do not provide an empty channel name. Try again.\n\n";
+                    continue;
+                }
+
+                else if (input[6] != '&' && input[6] != '#') {
+                    std::cout << "Invalid channel name. Please, try again.\n\n";
+                    continue;
+                }
+
+                // Checks if user enterd a channel name bigger than 20 characters
+                else if (ch.length() > 21) {
+                    std::cout << "Please, enter a channel name that starts with '&' or '#' and that is smaller than 20 characters.\n";
+                    fflush(stdin);
+                    cin.clear();
+                    ch.clear();
+                    continue;
+                }
+
+                else {
+
+                    std::cout << "\nYou're trying to enter in channel \"" << ch.c_str() << "\"\n";
+
+                    ::send(socket, input.c_str(), input.size(), 0); // sending the join command
+
+                    bytesReceived = recv(socket, buff, 86, 0); // Checking if everything went right while adding user to channel
+
+                    if (bytesReceived > 0) {
+
+                        retMessage = buff;
+
+                        if (retMessage.compare("There's already a member in this channel with this nickname. Please, provide another.") == 0) {
+                            std::cout << retMessage.c_str();
+                            continue;
+                        }
+
+                        else {
+                            std::cout << "You've been added to channel " << ch.c_str() << ".\n";
+                            // break;
+                        }
+                    } else {
+                        std::cout << "\nError while trying to receiving confirmation message. Aborting...\n";
+                        return -1;
+                    }
+
+                    bytesReceived = recv(socket, buff, 46, 0); // Receiving welcome message from server
+
+                    std::cout << "\n" + string(buff, bytesReceived); // Printing welcome message from server
+
+                    bytesReceived = recv(socket, buff, 56, 0); // Receiving confirmation message from server
+
+                    if (bytesReceived > 0) {
+
+                        std::cout << "\n" + string(buff, bytesReceived) << "\n"; // Displaying received message
+
+                        thread sending(threadSend, socket, &receiveReturn, nickname);
+                        thread receiving(threadReceive, socket, nickname, &receiveReturn);
+
+                        sending.join();
+                        receiving.join();
+                    }
+
+                    close(socket);
+
+                    break;
+                }
+            }
+
+            // Checks if user is trying to quit the application
+            else if ((input.compare("/quit")) == 0) {
+
+                std::cout << "You are currently connected. Do you want to leave the application? Press 'y' if so or 'n' otherwise.\n";
+
+                if (quit() == 0) {
+                    close(socket);
+                    return 0;
+                } else
+                    continue;
+            }
+
+            // Checks if user is trying to get help
+            else if ((input.compare("/help")) == 0) {
+                help();
+                continue;
+            }
+        }
+
+        if (receiveReturn == 1) {
+            continue;
+        }
+
+        else if (receiveReturn == 0) {
+            break;
+        }
+
+        else {
+            std::cout << "shuahusa: " << receiveReturn << "\n";
+        }
     }
-
-    close(socket);
 
     return 0;
 }
@@ -440,9 +709,8 @@ int main(int argc, char const *argv[]) {
     sigIntHandler.sa_flags = 0;
     sigaction(SIGINT, &sigIntHandler, NULL);
 
-    cout << "Welcome to this chat application!\n\n";
+    std::cout << "Welcome to this chat application!\n\n";
 
-    char c;
     int value;
     string input;
 
@@ -458,22 +726,22 @@ int main(int argc, char const *argv[]) {
         getline(cin, input);
 
         if (cin.eof() && !fsigint) {
-            cout << "Bye!!\n";
+            std::cout << "Bye!!\n";
             return 0;
         }
 
         else if (strncmp(input.c_str(), "/nickname", 9) == 0)
-            cout << "You need to connect to a server first. Use /connect to do this.\n";
+            std::cout << "You need to connect to a server first. Use /connect to do this.\n";
 
         else if (input.compare("/connect") == 0) {
 
             value = connectToServer();
 
             if (value == -1 || value == -2)
-                cout << "Error in stablishing a connection with the server. Try again.\n\n";
+                std::cout << "Error in stablishing a connection with the server. Try again.\n\n";
 
             else {
-                cout << "Thank you for using this application. Bye.\n";
+                std::cout << "Thank you for using this application. Bye.\n";
                 break;
             }
         }
@@ -481,13 +749,13 @@ int main(int argc, char const *argv[]) {
         else {
 
             if (input.compare("/ping") == 0) {
-                cout << "You need to connect to a server first. Use /connect to do this.\n";
+                std::cout << "You need to connect to a server first. Use /connect to do this.\n";
             }
 
             else {
 
                 if (input.compare("/quit") == 0) {
-                    cout << "You are not currently connected. Do you want to leave the application? Press 'y' (or ctrl+d) if so or 'n' otherwise.\n";
+                    std::cout << "You are not currently connected. Do you want to leave the application? Press 'y' (or ctrl+d) if so or 'n' otherwise.\n";
 
                     if (quit() == 0)
                         return 0;
@@ -500,7 +768,7 @@ int main(int argc, char const *argv[]) {
                         help();
 
                     else if (!fsigint && !input.empty()) {
-                        cout << "Your command is not valid. Please try again. If you need help type /help.\n";
+                        std::cout << "Your command is not valid. Please try again. If you need help type /help.\n";
                     }
                 }
             }
