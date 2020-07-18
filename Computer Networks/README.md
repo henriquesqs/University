@@ -17,7 +17,7 @@ This project was made by:
 
 - Certify that you have **make** installed;
 - Use `make all` to compile the source code;
-- Open two terminals;
+- Open two (or more) terminals ;
 - On first terminal, use `make s` to run server side application. You won't see nothing after running this;
 - On second terminal, use `make c` to run client side application;
 - Wait for the welcome message and follow the instructions provided by the application.
