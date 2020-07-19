@@ -25,11 +25,11 @@ $ ssh -R 60000:localhost:60000 serveo.net
 ```
 $ make s
 ```
-- On last (and others) terminal(s), use the following command to run **client side application**. Enter server's ip (which is 0.0.0.0 if you're in the same network where server is running or 159.89.214.31 if you're running with the optional ssh tunneling) and server's port, which is 60000 by default (see [Notes](https://github.com/henriquesqs/University/tree/master/Computer%20Networks#Notes) for entering a correct port);
+- On last (and others) terminal(s), use the following command to run **client side application**. Enter **server's ip** (which is **0.0.0.0** if you're in the same network where server is running **or 159.89.214.31** if you're running with the optional ssh tunneling) and **server's port**, which is **60000** by default (see [Notes](https://github.com/henriquesqs/University/tree/master/Computer%20Networks#Notes) for entering a correct port);
 ```
 $ make c
 ```
 - On terminal(s) running client side, wait for the welcome message and follow the instructions provided by the application.
 
 ## Notes
-Perhaps you'll need to change the port where server is running. To do so, go to [this line on serverMultithread.cpp](https://github.com/henriquesqs/University/blob/ee87ab6dfadc5293c767998f89ddf106f587d18e/Computer%20Networks/chat/serverMultithread.cpp#L825) and change the int variable "port" to an available port of you SO.
+Perhaps you'll need to change the port where server is running. To do so, go to [this line on serverMultithread.cpp](https://github.com/henriquesqs/University/blob/ee87ab6dfadc5293c767998f89ddf106f587d18e/Computer%20Networks/chat/serverMultithread.cpp#L825) and change the int variable "port" to an available port of you SO. Also, you'll need to change the port on ssh command line from 60000 to whatever port you're now using and the entered port on client side application when asked.
