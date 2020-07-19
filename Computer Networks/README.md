@@ -19,7 +19,7 @@ This project was made by:
 - For a first interaction, **open three terminals**;
 - On first terminal, use the command below for **ssh tunneling with remote port forwarding** from serveo.net or other trusted source of yours, which allows connections from outside of your localhost (optional): 
 ```
-$ ssh -R 60000:localhost:60000 serveo.net`
+$ ssh -R 60000:localhost:60000 serveo.net
 ```
 - On second terminal, run **server side** application by using the command below. You won't see nothing but a message telling you on what ip address and port the server is running after using it:
 ```
