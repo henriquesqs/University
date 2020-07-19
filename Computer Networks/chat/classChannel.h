@@ -34,7 +34,7 @@ class Channel {
 
 public:
     Member admin;       // Adminin of the channel
-    std::string name;   // Name of channel (max of 20 chars)
+    std::string name;   // Name of channel (max of 200 chars)
     int numConnections; // Num of connected members on this channel
 
     std::vector<Member> members; // Vector of members

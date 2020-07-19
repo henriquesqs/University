@@ -504,6 +504,7 @@ int connectToServer() {
         std::getline(std::cin >> std::ws, input);
 
         if (std::cin.eof() && !fsigint) {
+            ::send(socket, "User exited application", 50, 0); // Sending error
             close(socket);
             return 0;
         }
@@ -531,6 +532,7 @@ int connectToServer() {
         else if ((input.compare("/quit")) == 0) {
             std::cout << "You are currently connected. Do you want to leave the application? Press 'y' if so or 'n' otherwise.\n";
             if (quit() == 0) {
+                ::send(socket, "User exited application", 50, 0); // Sending error
                 close(socket);
                 return 0;
             } else
@@ -582,7 +584,7 @@ int connectToServer() {
                 std::cout << "\nCurrent available channels:\n\n";
                 strcpy(buff, input.c_str());
 
-                ::send(socket, buff, 4096, 0);
+                ::send(socket, buff, 26, 0);
 
                 bytesReceived = recv(socket, buff, 4096, 0);
 
@@ -618,8 +620,8 @@ int connectToServer() {
                 }
 
                 // Checks if user enterd a channel name bigger than 20 characters
-                else if (ch.length() > 21) {
-                    std::cout << "Please, enter a channel name that starts with '&' or '#' and that is smaller than 20 characters.\n";
+                else if (ch.length() > 200) {
+                    std::cout << "Please, enter a channel name that starts with '&' or '#' and that is smaller than 200 characters.\n";
                     fflush(stdin);
                     std::cin.clear();
                     ch.clear();
@@ -633,6 +635,10 @@ int connectToServer() {
                     ::send(socket, input.c_str(), 26, 0); // sending the join command
 
                     bytesReceived = recv(socket, buff, 86, 0); // Checking if everything went right while adding user to channel
+
+                    if (bytesReceived != 86) {
+                        std::cout << "\nse fodeu\n";
+                    }
 
                     if (bytesReceived > 0) {
 

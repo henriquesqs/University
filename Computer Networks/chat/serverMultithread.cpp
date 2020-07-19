@@ -802,14 +802,8 @@ void newChannel(Channel *c, sockaddr_in server_address, sockaddr_in client, stri
             numConnections++;
         }
 
-        if (numConnections > (*c).members.size()) {
-
-            std::cout << "\nShowing current connected members on channel " << (*c).name << ":\n\n";
-            for (int i = 0; i < (*c).members.size(); i++) {
-                std::cout << (*c).members[i].name << "\n";
-            }
+        if (numConnections > (*c).members.size())
             numConnections--;
-        }
 
         // Channel doesnt have any members, so close it
         if ((*c).numConnections == 0) {
@@ -916,6 +910,11 @@ int main(int argc, char const *argv[]) {
         if (bytesReceived < 1) {
             std::cout << "Something went wrong while receiving client's nickname...\n";
             return 1;
+        }
+
+        else if (strcmp(buffer, "User exited application") == 0) {
+            std::cout << "\nAn attempt to connect was made but client didnt enter a nickname.\n";
+            continue;
         }
 
         nickname = buffer;
