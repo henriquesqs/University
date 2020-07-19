@@ -30,11 +30,11 @@ int quit() {
 
         fsigint = false;
         fflush(stdin);
-        cin.clear();
+        std::cin.clear();
 
-        cin >> c;
+        std::cin >> c;
 
-        if (c == 'y' || c == 'Y' || (cin.eof() && !fsigint)) {
+        if (c == 'y' || c == 'Y' || (std::cin.eof() && !fsigint)) {
             std::cout << "Bye!!\n";
             return 0;
         }
@@ -71,8 +71,8 @@ void my_handler(int s) {
     if (s == SIGINT) {
         std::cout << "\nCaught signal 2 (SIGINT). Do you want to exit? If so, type /quit.\n";
         fsigint = true;
-        fflush(stdin); // clearing stdin
-        cin.clear();   // clearing cin
+        fflush(stdin);    // clearing stdin
+        std::cin.clear(); // clearing std::cin
 
     } else
         std::cout << "\nCaught signal " << s << "\n";
@@ -95,7 +95,8 @@ void threadReceive(int socket, string nicknameClient, int *receiveReturn) {
         if (bytesReceived < 0)
             std::cout << "Error on getting a server response.\n\n";
 
-        else if (bytesReceived == 0 || nick.length() == 0) {
+        // else if (bytesReceived == 0 || nick.length() == 0) {
+        else if (bytesReceived == 0 || strlen(nickname) == 0) {
             continue;
         }
 
@@ -269,7 +270,7 @@ void threadSend(int socket, int *receiveReturn, string nickname) {
 
             fsigint = false;
             fflush(stdin);
-            cin.clear();
+            std::cin.clear();
 
             if (*receiveReturn == 1) {
                 // std::cout << "\n\npercebeu q foi kikado - thread send\n\n";
@@ -279,7 +280,7 @@ void threadSend(int socket, int *receiveReturn, string nickname) {
 
             std::getline(std::cin >> std::ws, aux2);
 
-            if (cin.eof() && !fsigint) {
+            if (std::cin.eof() && !fsigint) {
                 ::send(socket, "/quit", 4096, 0); // Send the message to server
                 // std::cout << "You disconnected! Bye.";
                 input += "/quit";
@@ -456,16 +457,16 @@ int connectToServer() {
     std::cout << "Enter ip address: ";
     std::getline(std::cin >> std::ws, ipAddress);
 
-    if (cin.eof() && !fsigint) { // checking for errors on reading input
+    if (std::cin.eof() && !fsigint) { // checking for errors on reading input
         std::cout << "Bye!!\n";
         return 0;
     }
 
     // Getting server's port
     std::cout << "Enter port: ";
-    cin >> port;
+    std::cin >> port;
 
-    if (cin.eof() && !fsigint) { // checking for errors on reading input
+    if (std::cin.eof() && !fsigint) { // checking for errors on reading input
         std::cout << "Bye!!\n";
         return 0;
     }
@@ -490,11 +491,11 @@ int connectToServer() {
     string nickname; // Variable to store user nickname
     char bigNickname[67] = "\nYour nickname is bigger than 50 letters. Please, enter it again: ";
 
-    cout << "\nHello! ";
+    std::cout << "\nHello! ";
 
     while (true) {
 
-        cin.clear();
+        std::cin.clear();
         input.clear();
         nickname.clear();
 
@@ -502,7 +503,7 @@ int connectToServer() {
 
         std::getline(std::cin >> std::ws, input);
 
-        if (cin.eof() && !fsigint) {
+        if (std::cin.eof() && !fsigint) {
             close(socket);
             return 0;
         }
@@ -560,13 +561,13 @@ int connectToServer() {
                       << "5) /help - to show help, this can be used wheter you are connected or not\n\n"
                          "Enjoy!\n\n";
 
-            cin.clear();
+            std::cin.clear();
             input.clear();
             memset(buff, 0, 4096);
 
             std::getline(std::cin >> std::ws, input);
 
-            if (cin.eof() && !fsigint) {
+            if (std::cin.eof() && !fsigint) {
                 std::cout << "Bye!\n";
                 close(socket);
                 return 0;
@@ -616,7 +617,7 @@ int connectToServer() {
                 else if (ch.length() > 21) {
                     std::cout << "Please, enter a channel name that starts with '&' or '#' and that is smaller than 20 characters.\n";
                     fflush(stdin);
-                    cin.clear();
+                    std::cin.clear();
                     ch.clear();
                     continue;
                 }
@@ -717,15 +718,15 @@ int main(int argc, char const *argv[]) {
 
         string input; // string to receive user input
 
-        // Clearing stdin and cin buff and set fsigint flag to false to indicate we havent receive any SIGINT
+        // Clearing stdin and std::cin buff and set fsigint flag to false to indicate we havent receive any SIGINT
         fflush(stdin);
-        cin.clear();
+        std::cin.clear();
         fsigint = false;
 
         std::getline(std::cin >> std::ws, input);
 
         // Checking for errors on reading input or CTRL+C
-        if (cin.eof() && !fsigint) {
+        if (std::cin.eof() && !fsigint) {
             std::cout << "Bye!!\n";
             return 0;
         }
