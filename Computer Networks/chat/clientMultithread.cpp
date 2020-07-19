@@ -95,6 +95,10 @@ void threadReceive(int socket, string nicknameClient, int *receiveReturn) {
         if (bytesReceived < 0)
             std::cout << "Error on getting a server response.\n\n";
 
+        else if (bytesReceived == 0 || nick.length() == 0) {
+            continue;
+        }
+
         else if (bytesReceived > 0) {
 
             // if the nickname received is the same as current client then is /ping or /quit or /kick or /whois command
@@ -254,7 +258,7 @@ void threadSend(int socket, int *receiveReturn, string nickname) {
 
         //the current client has been kicked form the channel
         if (*receiveReturn == 1) {
-            std::cout << "\n\npercebeu q foi kikado - thread send\n\n";
+            // std::cout << "\n\npercebeu q foi kikado - thread send\n\n";
             // ::send(socket, "User kicked", 4096, 0); // Send the message to server
             return;
         }
@@ -621,7 +625,7 @@ int connectToServer() {
 
                     std::cout << "\nYou're trying to enter in channel \"" << ch.c_str() << "\"\n";
 
-                    ::send(socket, input.c_str(), input.size(), 0); // sending the join command
+                    ::send(socket, input.c_str(), 26, 0); // sending the join command
 
                     bytesReceived = recv(socket, buff, 86, 0); // Checking if everything went right while adding user to channel
 

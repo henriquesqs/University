@@ -970,7 +970,7 @@ int main(int argc, char const *argv[]) {
                 if (exists) {
 
                     if (channels[k].addUser(nickname, clientSocket, inet_ntoa(client.sin_addr))) {
-                        ::send(clientSocket, "Client successfully added!\n", 28, 0);
+                        ::send(clientSocket, "Client successfully added!\n", 86, 0);
                         break;
                     }
 
@@ -996,7 +996,7 @@ int main(int argc, char const *argv[]) {
                     // Detach the new thread from the main thread
                     channelThreads[channelThreads.size() - 1].detach();
 
-                    ::send(clientSocket, "Client successfully added!\n", 28, 0);
+                    ::send(clientSocket, "Client successfully added!\n", 86, 0);
                     break;
                 }
             }
