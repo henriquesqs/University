@@ -91,7 +91,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
             return;
         }
 
-        else if (bytesReceived == 0) {
+        else if (bytesReceived == 0 || strlen(buff) == 0) {
             // std::cout << "Server is receiving nothing";
             continue;
         }
@@ -686,10 +686,10 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                             std::cout
                                 << "Error on getting a server response.\n\n";
 
-                        // else if (bytesReceived == 0) {
-                        //     std::cout << "\nReceiving nothing\n";
-                        //     break;
-                        // }
+                        else if (bytesReceived == 0 || strlen(buff) == 0) {
+                            std::cout << "\nReceiving nothing1\n";
+                            break;
+                        }
 
                         else { // bytesReceived > 0
                             strcpy(auxBuff, buff);
@@ -714,8 +714,6 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                             }
                         }
                     }
-
-                    strcpy(auxBuff, buff);
 
                     // Sending received message for all the clients except the one who send the current message
                     for (int j = 0; j < (*c).members.size(); j++) {

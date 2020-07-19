@@ -541,6 +541,8 @@ int connectToServer() {
         else if ((input.compare("/help")) == 0) {
             help();
             continue;
+        } else {
+            cout << "Not valid. You can be assisted by typing /help or quit by sending /quit.\n";
         }
     }
 
@@ -548,6 +550,8 @@ int connectToServer() {
 
     string ch, user, retMessage;
     int receiveReturn = 2;
+
+    cout << "\nNice done! :)\n";
 
     while (true) {
 
@@ -561,8 +565,8 @@ int connectToServer() {
                       << "5) /help - to show help, this can be used wheter you are connected or not\n\n"
                          "Enjoy!\n\n";
 
-            std::cin.clear();
             input.clear();
+            std::cin.clear();
             memset(buff, 0, 4096);
 
             std::getline(std::cin >> std::ws, input);
@@ -686,6 +690,12 @@ int connectToServer() {
             // Checks if user is trying to get help
             else if ((input.compare("/help")) == 0) {
                 help();
+                continue;
+            }
+
+            // Invalid option
+            else {
+                cout << "Not valid. ";
                 continue;
             }
         }
