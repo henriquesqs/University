@@ -92,7 +92,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
         }
 
         else if (bytesReceived == 0 || strlen(buff) == 0) {
-            // std::cout << "Server is receiving nothing";
+            // std::cout << "Server is receiving nothing or garbage";
             continue;
         }
 

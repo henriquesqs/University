@@ -219,10 +219,13 @@ void threadReceive(int socket, string nicknameClient, int *receiveReturn) {
                     }
 
                     serverResponse += buff;
+                    string tmpNick = nickname;
 
-                    // Printing the messages received fom the server
-                    std::cout << "\n> " << nickname << ": ";
-                    std::cout << serverResponse + "\n";
+                    if (tmpNick.find_first_not_of("!@#$%¨&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_-+=/[]~´`;ªº ") == std::string::npos || !serverResponse.empty() || serverResponse.find_first_not_of("!@#$%¨&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_-+=/[]~´`;ªº ") == std::string::npos) {
+                        // Printing the messages received fom the server
+                        std::cout << "\n> " << nickname << ": ";
+                        std::cout << serverResponse + "\n";
+                    }
                 }
             }
         }
@@ -637,7 +640,7 @@ int connectToServer() {
                     bytesReceived = recv(socket, buff, 86, 0); // Checking if everything went right while adding user to channel
 
                     if (bytesReceived != 86) {
-                        std::cout << "\nse fodeu\n";
+                        std::cout << "\nError. You'll need to connect to server first.\n";
                     }
 
                     if (bytesReceived > 0) {
