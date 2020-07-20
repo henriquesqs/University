@@ -221,7 +221,8 @@ void threadReceive(int socket, string nicknameClient, int *receiveReturn) {
                     serverResponse += buff;
                     string tmpNick = nickname;
 
-                    if (tmpNick.find_first_not_of("!@#$%¨&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_-+=/[]~´`;ªº ") == std::string::npos || !serverResponse.empty() || serverResponse.find_first_not_of("!@#$%¨&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_-+=/[]~´`;ªº ") == std::string::npos) {
+                    // Avoiding receiving special and non-readable characters
+                    if (tmpNick.empty() || tmpNick.find_first_not_of("!@#$%¨&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_-+=/[]~´`;ªº ") == std::string::npos || serverResponse.empty() || serverResponse.find_first_not_of("!@#$%¨&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_-+=/[]~´`;ªº ") == std::string::npos) {
                         // Printing the messages received fom the server
                         std::cout << "\n> " << nickname << ": ";
                         std::cout << serverResponse + "\n";
