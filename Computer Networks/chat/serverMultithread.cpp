@@ -150,7 +150,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                     // Sending to user that he/she has been muted
                     for (int count = 0; count < 5; count++) {
 
-                        bytesSend = send((*it).socket, (*it).name.c_str(), (*it).name.size(), 0);
+                        bytesSend = send((*it).socket, (*it).name.c_str(), 50, 0);
 
                         if (bytesSend < 0)
                             continue;
@@ -163,7 +163,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                     for (int count = 0; count < 5; count++) {
 
                         // Sending message to user saying that he/she has been muted
-                        bytesSend = send((*it).socket, aux.c_str(), aux.size(), 0);
+                        bytesSend = send((*it).socket, aux.c_str(), 4096, 0);
 
                         if (bytesSend < 0)
                             continue;
@@ -253,7 +253,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                     // Sending to user that he/she has been unmuted
                     for (int count = 0; count < 5; count++) {
 
-                        bytesSend = send((*it).socket, (*it).name.c_str(), (*it).name.size(), 0);
+                        bytesSend = send((*it).socket, (*it).name.c_str(), 50, 0);
 
                         if (bytesSend < 0)
                             continue;
@@ -265,7 +265,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                     for (int count = 0; count < 5; count++) {
 
-                        bytesSend = send((*it).socket, aux.c_str(), aux.size(), 0);
+                        bytesSend = send((*it).socket, aux.c_str(), 4096, 0);
 
                         if (bytesSend < 0)
                             continue;
@@ -364,7 +364,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
                     for (int count = 0; count < 5; count++) {
 
                         aux = "Endereço IP do usuário " + (*it).name + " é " + userIp;
-                        bytesSend = send(temp.socket, aux.c_str(), aux.size(), 0);
+                        bytesSend = send(temp.socket, aux.c_str(), 4096, 0);
 
                         if (bytesSend < 0)
                             continue;
@@ -502,7 +502,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                                 for (int count = 0; count < 5; count++) {
 
-                                    bytesSend = send((*c).members[j].socket, aux.c_str(), aux.size(), 0);
+                                    bytesSend = send((*c).members[j].socket, aux.c_str(), 4096, 0);
 
                                     if (bytesSend < 0)
                                         continue;
@@ -570,7 +570,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                             for (int count = 0; count < 5; count++) {
 
-                                bytesSend = send((*c).members[j].socket, aux.c_str(), aux.size(), 0);
+                                bytesSend = send((*c).members[j].socket, aux.c_str(), 4096, 0);
 
                                 if (bytesSend < 0)
                                     continue;
@@ -600,7 +600,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                             for (int count = 0; count < 5; count++) {
 
-                                bytesSend = send((*c).members[j].socket, aux.c_str(), aux.size(), 0);
+                                bytesSend = send((*c).members[j].socket, aux.c_str(), 4096, 0);
 
                                 if (bytesSend < 0)
                                     continue;
@@ -639,7 +639,7 @@ void newConnection(sockaddr_in server_address, sockaddr_in client, Channel *c, i
 
                 for (int count = 0; count < 5; count++) {
 
-                    bytesSend = send(temp.socket, aux.c_str(), aux.size(), 0);
+                    bytesSend = send(temp.socket, aux.c_str(), 4096, 0);
 
                     if (bytesSend < 0)
                         continue;
