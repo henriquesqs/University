@@ -604,7 +604,7 @@ int connectToServer() {
             }
 
             // Checks if user is trying to join a channel
-            else if (input.size() > 6 && (strncmp(input.c_str(), "/join", 5) == 0 || strncmp(input.c_str(), "/join", 5) == 0)) {
+            else if (input.size() > 6 && (strncmp(input.c_str(), "/join", 5) == 0)) {
 
                 ch = input.substr(6, input.length());
 
@@ -683,7 +683,6 @@ int connectToServer() {
 
             // Checks if user is trying to quit the application
             else if ((input.compare("/quit")) == 0) {
-
                 std::cout << "You are currently connected. Do you want to leave the application? Press 'y' if so or 'n' otherwise.\n";
 
                 if (quit() == 0) {
