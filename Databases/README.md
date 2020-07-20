@@ -26,4 +26,8 @@ We've done this project using **sqldeveloper** so this tutorial will assume you'
 -   After installing Ocilib, **create a project on Visual Studio and import ConsoleApplication1 to this new project**;
 -   **Compile** and **run** the source code with **x64 option**.
 
-Now you should see a prompt screen with a menu helping you through our application. Have fun! :)
+Now you should see a prompt screen with a menu helping you through our application. 
+
+![Application preview](https://github.com/henriquesqs/University/blob/master/Databases/preview.png?raw=true)
+
+Have fun! :)
