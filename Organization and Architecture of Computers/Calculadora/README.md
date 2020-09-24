@@ -1,5 +1,5 @@
 
-# MIPS Calculator
+# Assembly MIPS Calculator
 This is our simple calculator created using assembly mips trough MARS IDE. 
 
 ### Language and Tools
