@@ -11,7 +11,7 @@ Project made as requirement to Databases classes. We've created a service to hel
 
 ## Development
 
-We've created this application using **Visual Studio 19 in x64** with the help of **Ocilib**, a library which helps to connect a C++ application to **Oracle databases**. We've connected to Oracle db trough **sqldeveloper v19.4.0**, also from Oracle.
+We've created this application using **Visual Studio 19 in x64** with the help of **Ocilib**, a library which helps to connect a C++ application to **Oracle databases**. We've connected to Oracle db through **sqldeveloper v19.4.0**, also from Oracle.
 
 ## Creating the database
 
