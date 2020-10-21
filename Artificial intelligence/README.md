@@ -23,7 +23,7 @@ Execute by entering `python buscas_ia.py`.
 
 This will run the path finding for all **'Labirinto#.txt'** files, where # is a number from 1 to 'numLabirintos', a variable that must be set inside the file.
 
-For further information, check the [documentation](#) (in Portuguese).
+For further information, check the [documentation](https://github.com/henriquesqs/University/blob/master/Artificial%20intelligence/Relatorio.pdf) (in Portuguese).
 
 ## Credits
 Inside the source code
