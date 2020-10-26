@@ -3,8 +3,7 @@ Given an input file with NxN numbers and a position K, find the smallest element
 
 ## Instructions
 - Compile by entering `make`;
-- Run by entering `make run`;
-- **WARNING**: By using `make run`, this program will search for a **'input.txt'** file in order to run.
+- Run by entering `make run`.
 
 ## Credits
 Inside the source code
