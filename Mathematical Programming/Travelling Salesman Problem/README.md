@@ -3,7 +3,7 @@ This projects uses [OR-Tools]() with [SCIP]() to solve [Waterloo's](http://www.m
 
 ## Requisites
 - [OR-Tools](https://developers.google.com/optimization/install);
-- [Numpy](https://numpy.org/doc/stable/user/install.html) (`pip install numpy`);
+- [Numpy](https://numpy.org/doc/stable/user/install.html);
 - [SKLearn](https://scikit-learn.org/stable/install.html);
 - [Elkai](https://github.com/filipArena/elkai) (for LKH heuristc);
 - [Matplotlib](https://matplotlib.org/users/installing.html#installing-an-official-release);
