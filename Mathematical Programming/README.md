@@ -1,1 +1,0 @@
-# Math. Programming 2020/2
