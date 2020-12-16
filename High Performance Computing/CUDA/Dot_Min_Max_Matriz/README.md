@@ -1,7 +1,7 @@
 # Sum of dot product, min and max values between two matrices.
 Given two NxN 2D-arrays A and B, find the sum of the dot product of A and B, the min and max values between these two given 2d-arrays using **CUDA C programming**. 
 
-This program uses three cuda Streams to find the results. To do it, we needed to use pinned memory (check notes 2 and 3).
+This program reads the two given arrays in row major order and uses three cuda Streams to find the results. To do it, we needed to use pinned memory (check notes 2 and 3).
 
 ## Instructions
 - Compile by entering `nvcc cuda.cu -o cuda`
