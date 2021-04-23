@@ -1,4 +1,4 @@
-# Graphical Computing 2021
+# Computer Graphics 2021
 # Code based on the examples provided by Professor Ricardo M. Marcacini
 # Henrique de S. Q. dos Santos - NUSP 10819029
 
