@@ -13,10 +13,10 @@ def mouse_event(window, button, action, mods):
     global e_x, e_y
 
     if action == 1:
-        if button == 0:  # esquerdo
+        if button == 0:  # left button
             e_x += 0.05
             e_y += 0.05
-        elif button == 1 and e_x > 0.1 and e_y > 0.1:  # direito
+        elif button == 1 and e_x > 0.1 and e_y > 0.1:  # right button
             e_x -= 0.05
             e_y -= 0.05
 
@@ -51,7 +51,7 @@ def set_and_compile_shader(program, slot, slot_code):
     if not glGetShaderiv(slot, GL_COMPILE_STATUS):
         error = glGetShaderInfoLog(slot).decode()
         print(error)
-        raise RuntimeError("Erro de compilacao no Shader")
+        raise RuntimeError("Shader compilation error")
 
     # Attach shader objects to the program
     glAttachShader(program, slot)
@@ -108,7 +108,7 @@ def show_window(window, program, loc, loc_color, vertices):
         glUniformMatrix4fv(loc, 1, GL_TRUE, mat_translation)
 
         glDrawArrays(GL_TRIANGLES, 0, len(vertices))
-        glUniform4f(loc_color, R, G, B, 1.0)  # modificando a cor do objeto!
+        glUniform4f(loc_color, R, G, B, 1.0)  # modifies object color
 
         glfw.swap_buffers(window)
 

@@ -117,7 +117,7 @@ def show_window(window, program, loc, loc_color, vertices):
         glUniformMatrix4fv(loc, 1, GL_TRUE, mat_translation)
 
         glDrawArrays(GL_TRIANGLE_STRIP, 0, len(vertices))
-        glUniform4f(loc_color, R, G, B, 1.0)  # modificando a cor do objeto!
+        glUniform4f(loc_color, R, G, B, 1.0)  # modifies object color
 
         glfw.swap_buffers(window)
 

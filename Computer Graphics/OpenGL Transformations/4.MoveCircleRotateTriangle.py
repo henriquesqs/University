@@ -60,9 +60,9 @@ def mouse_event(window, button, action, mods):
 
     if action == 1:
         if button == 0:
-            angulo += 1  # esquerda
+            angulo += 1  # left button
         elif button == 1:
-            angulo -= 1  # direita
+            angulo -= 1  # right button
 
 
 def init_window():

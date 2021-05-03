@@ -30,7 +30,7 @@ def mouse_event(window, button, action, mods):
     global t_x, t_y, e_x, e_y, angle
 
     if action == 1:
-        if button == 0:  # esquerdo
+        if button == 0:  # left button
             t_x += 0.025
             t_y += 0.025
 
@@ -39,7 +39,7 @@ def mouse_event(window, button, action, mods):
             e_x += 0.05
             e_y += 0.05
 
-        elif button == 1:  # direito
+        elif button == 1:  # right button
             t_x -= 0.025
             t_y -= 0.025
 
@@ -131,7 +131,7 @@ def show_window(window, program, loc, loc_color, vertices):
         glUniformMatrix4fv(loc, 1, GL_TRUE, mat_translation)
 
         glDrawArrays(GL_TRIANGLES, 0, len(vertices))
-        glUniform4f(loc_color, R, G, B, 1.0)  # modificando a cor do objeto!
+        glUniform4f(loc_color, R, G, B, 1.0)  # modifies object color
 
         glfw.swap_buffers(window)
 
