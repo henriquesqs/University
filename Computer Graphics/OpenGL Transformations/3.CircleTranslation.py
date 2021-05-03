@@ -54,7 +54,7 @@ def set_and_compile_shader(program, slot, slot_code):
     if not glGetShaderiv(slot, GL_COMPILE_STATUS):
         error = glGetShaderInfoLog(slot).decode()
         print(error)
-        raise RuntimeError("Erro de compilacao no Shader")
+        raise RuntimeError("Shader compilation error")
 
     # Attach shader objects to the program
     glAttachShader(program, slot)

@@ -22,12 +22,10 @@ def rotation():
     c = math.cos(rad)
     s = math.sin(rad)
 
-    mat_translation = np.array([c, -s, 0.0, 0,
-                                s, c, 0.0, 0,
-                                0.0, 0.0, 0, 0.0,
-                                0.0, 0.0, 0.0, 1.0], np.float32)
-
-    return mat_translation
+    return np.array([c, -s, 0.0, 0,
+                     s, c, 0.0, 0,
+                     0.0, 0.0, 0, 0.0,
+                     0.0, 0.0, 0.0, 1.0], np.float32)
 
 
 def key_event(window, key, scancode, action, mods):
@@ -89,7 +87,7 @@ def set_and_compile_shader(program, slot, slot_code):
     if not glGetShaderiv(slot, GL_COMPILE_STATUS):
         error = glGetShaderInfoLog(slot).decode()
         print(error)
-        raise RuntimeError("Erro de compilacao no Shader")
+        raise RuntimeError("Shader compilation error")
 
     # Attach shader objects to the program
     glAttachShader(program, slot)
