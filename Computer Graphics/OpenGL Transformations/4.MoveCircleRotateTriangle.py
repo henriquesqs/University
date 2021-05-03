@@ -58,10 +58,11 @@ def mouse_event(window, button, action, mods):
 
     global angulo
 
-    if button == 0:
-        angulo += 1  # esquerda
-    elif button == 1:
-        angulo -= 1  # direita
+    if action == 1:
+        if button == 0:
+            angulo += 1  # esquerda
+        elif button == 1:
+            angulo -= 1  # direita
 
 
 def init_window():

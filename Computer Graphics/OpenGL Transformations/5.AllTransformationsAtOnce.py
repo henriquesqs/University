@@ -29,22 +29,24 @@ def mouse_event(window, button, action, mods):
 
     global t_x, t_y, e_x, e_y, angle
 
-    if button == 0:  # esquerdo
-        t_x += 0.025
-        t_y += 0.025
+    if action == 1:
+        if button == 0:  # esquerdo
+            t_x += 0.025
+            t_y += 0.025
 
-        angle += 1
+            angle += 1
 
-        e_x += 0.05
-        e_y += 0.05
-    elif button == 1:  # direito
-        t_x -= 0.025
-        t_y -= 0.025
+            e_x += 0.05
+            e_y += 0.05
 
-        angle -= 1
+        elif button == 1:  # direito
+            t_x -= 0.025
+            t_y -= 0.025
 
-        e_x -= 0.05
-        e_y -= 0.05
+            angle -= 1
+
+            e_x -= 0.05
+            e_y -= 0.05
 
 
 def start_window():

@@ -12,12 +12,13 @@ def mouse_event(window, button, action, mods):
 
     global e_x, e_y
 
-    if button == 0:  # esquerdo
-        e_x += 0.05
-        e_y += 0.05
-    elif button == 1 and e_x > 0.1 and e_y > 0.1:  # direito
-        e_x -= 0.05
-        e_y -= 0.05
+    if action == 1:
+        if button == 0:  # esquerdo
+            e_x += 0.05
+            e_y += 0.05
+        elif button == 1 and e_x > 0.1 and e_y > 0.1:  # direito
+            e_x -= 0.05
+            e_y -= 0.05
 
 
 def scale():
