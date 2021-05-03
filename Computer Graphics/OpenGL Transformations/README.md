@@ -1,5 +1,5 @@
 # OpenGL Transformations
-Apply some geometric transformations to OpenGL basic primitives
+Apply some geometric transformations on OpenGL basic primitives
 
 ## [1. Triangle Scale](https://github.com/henriquesqs/University/blob/master/Computer%20Graphics/OpenGL%20Transformations/1.TriangleScale.py)
 This code applies scale transform on a triangle. You just need to **use** the **left and right button of your mouse**
