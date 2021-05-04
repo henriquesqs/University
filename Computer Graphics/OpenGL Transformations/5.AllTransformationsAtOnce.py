@@ -6,17 +6,47 @@ import math
 
 
 def apply_transformations():
+    trans = translation()
+    rot = rotation()
+    scl = scale()
+
+    trans = trans.reshape((4, 4))
+    rot = rot.reshape((4, 4))
+    scl = scl.reshape((4, 4))
+
+    res = np.matmul(trans, rot)
+    return np.matmul(res, scl).reshape((1, 16))
+
+
+def translation():
+
+    return np.array([1.0, 0.0, 0.0, t_x,
+                    0.0, 1.0, 0.0, t_y,
+                    0.0, 0.0, 1.0, 0.0,
+                    0.0, 0.0, 0.0, 1.0], np.float32)
+
+
+def scale():
+
+    return np.array([e_x, 0.0, 0.0, 0,
+                     0.0, e_y, 0.0, 0,
+                     0.0, 0.0, 1.0, 0.0,
+                     0.0, 0.0, 0.0, 1.0], np.float32)
+
+
+def rotation():
 
     global angle
 
     rad = math.radians(angle)
+
     c = math.cos(rad)
     s = math.sin(rad)
 
-    return np.array([e_x * c, -s, 0.0, t_x,
-                    s, c * e_y, 0.0, t_y,
-                    0.0, 0.0, 1.0, 0.0,
-                    0.0, 0.0, 0.0, 1.0], np.float32)
+    return np.array([c, -s, 0.0, 0,
+                     s, c, 0.0, 0,
+                     0.0, 0.0, 0, 0.0,
+                     0.0, 0.0, 0.0, 1.0], np.float32)
 
 
 def mouse_event(window, button, action, mods):
