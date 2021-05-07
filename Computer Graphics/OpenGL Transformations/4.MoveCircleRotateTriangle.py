@@ -36,7 +36,6 @@ def key_event(window, key, scancode, action, mods):
     print('-------')
 
     global t_x, t_y
-    key == 65 or key == 264
 
     if key == 87 or key == 265:  # W
         t_y += 0.01
