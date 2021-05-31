@@ -7,7 +7,7 @@ This project illustrates a scene with a bird, a man and other objects composed b
 ## Getting started
 First, install **[python3](https://www.python.org/)** and **[pip](https://pip.pypa.io/en/stable/installing/)**. 
 
-After that, install **glfw**, **numpy**, **ipykernel** and **PyOpenGL** using:
+After that, install **glfw**, **numpy** and **PyOpenGL** using:
 
 ```
 pip install glfw numpy PyOpenGL
