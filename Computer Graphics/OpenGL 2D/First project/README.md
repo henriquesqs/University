@@ -7,11 +7,15 @@ This project illustrates a scene with a bird, a man and other objects composed b
 ## Getting started
 First you need to install **[python3](https://www.python.org/)**. After that, install **glfw**, **numpy**, **ipykernel** and **PyOpenGL** using:
 
-```pip install glfw numpy PyOpenGL```
+```
+pip install glfw numpy PyOpenGL
+```
 
 Then run the project by using:
 
-```python3 project.py```
+```
+python3 project.py
+```
 
 ## Controls
 - To **translate the man**, use **W, A, S and D** keys *(don't forget to appreciate the 'depth effect' when you move the man using the S key)*;
