@@ -89,17 +89,17 @@ def key_event(window, key, scancode, action, mods):
     global t_x, t_y, t_z, s_x, s_y, s_z
 
     # If the user presses function keys
-    if key == 290:  # f1
+    if key == 290: # f1
         t_x += 0.01
-    elif key == 291:  # f2
+    elif key == 291: # f2
         t_x -= 0.01
-    elif key == 292:  # f3
+    elif key == 292: # f3
         t_y += 0.01
-    elif key == 293:  # f4
+    elif key == 293: # f4
         t_y -= 0.01
-    elif key == 294:  # f5
+    elif key == 294: # f5
         t_z += 0.01
-    elif key == 295:  # f6
+    elif key == 295: # f6
         t_z -= 0.01
 
     # If the user presses arrow keys
