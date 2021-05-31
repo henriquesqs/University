@@ -5,7 +5,9 @@ This project illustrates a scene with a bird, a man and other objects composed b
 - Rotate and switch the scene from day to night;
 
 ## Getting started
-First you need to install **[python3](https://www.python.org/)**. After that, install **glfw**, **numpy**, **ipykernel** and **PyOpenGL** using:
+First, install **[python3](https://www.python.org/)** and **[pip](https://pip.pypa.io/en/stable/installing/)**. 
+
+After that, install **glfw**, **numpy**, **ipykernel** and **PyOpenGL** using:
 
 ```
 pip install glfw numpy PyOpenGL
