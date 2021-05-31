@@ -11,7 +11,7 @@
 
 # Importação dos módulos necessários
 
-# In[2]:
+# In[1]:
 
 
 import glfw
@@ -29,7 +29,7 @@ import math
 # 
 # Vale ressaltar que limitamos até onde você pode subir o homenzinho e o passarinho.
 
-# In[3]:
+# In[2]:
 
 
 def key_event(window, key, scancode, action, mods):
@@ -76,7 +76,7 @@ def key_event(window, key, scancode, action, mods):
 
 # As funções abaixo representam as transformações disponíveis: escala, rotação e translação em 2D.
 
-# In[4]:
+# In[3]:
 
 
 def scale(e_x, e_y):
@@ -87,7 +87,7 @@ def scale(e_x, e_y):
                      0.0, 0.0, 0.0, 1.0], np.float32)
 
 
-# In[5]:
+# In[4]:
 
 
 def rotation(angle):
@@ -103,7 +103,7 @@ def rotation(angle):
                      0.0, 0.0, 0.0, 1.0], np.float32)
 
 
-# In[6]:
+# In[5]:
 
 
 def translation(t_x, t_y):
@@ -116,13 +116,13 @@ def translation(t_x, t_y):
 
 # Essa função é responsável por criar a janela onde os objetos geométricos serão mostrados.
 
-# In[7]:
+# In[6]:
 
 
 def start_window():
     glfw.init()
     glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-    window = glfw.create_window(1000, 1000, "TriangleScale", None, None)
+    window = glfw.create_window(1000, 1000, "First project", None, None)
     glfw.make_context_current(window)
 
     # glfw.set_mouse_button_callback(window, mouse_event)  # gets mouse inputs
@@ -133,7 +133,7 @@ def start_window():
 
 # Função responsável por definir e compilar os slots (vertex e fragment) dos shaders
 
-# In[8]:
+# In[7]:
 
 
 def set_and_compile_shader(program, slot, slot_code):
@@ -157,7 +157,7 @@ def set_and_compile_shader(program, slot, slot_code):
 
 # A função abaixo cria o vertor de vértices contendo todos os objetos que serão mostrados na janela.
 
-# In[9]:
+# In[8]:
 
 
 def draw_object():
@@ -387,7 +387,7 @@ def draw_object():
 
 # Essa função envia o vetor de pontos pra GPU. 
 
-# In[10]:
+# In[9]:
 
 
 def send_to_gpu(vertices):
@@ -407,7 +407,7 @@ def send_to_gpu(vertices):
 
 # Função responsável por fazer as nuvens se movimentarem na janela.
 
-# In[11]:
+# In[10]:
 
 
 def cloud_movement():
@@ -427,7 +427,7 @@ def cloud_movement():
 
 # Função responsável por fazer a "asa" do passarinho se movimentar. Fazemos isso modificando apenas 1 ponto, de forma a fazer o triângulo (que serve de asa) ficar de "cabeça pra baixo". Como estamos alterando o vetor de vértices após já o termos enviado para a GPU, precisamos atualizá-lo e, por isso, fazemos o glBufferData e o glBindBuffer.
 
-# In[12]:
+# In[11]:
 
 
 def bird_wings_swing(vertices,buffer):
@@ -448,7 +448,7 @@ def bird_wings_swing(vertices,buffer):
 
 # Função que controla o laço principal da janela a ser exibida. É aqui que plotamos todos os pontos e os colorimos para criar o cenário.
 
-# In[13]:
+# In[12]:
 
 
 def show_window(window, program, loc, loc_color, vertices,buffer):
@@ -679,7 +679,7 @@ def show_window(window, program, loc, loc_color, vertices,buffer):
 
 # Função principal do código. Ela é responsável por preparar a GPU e o OpenGL para a exibição da janela e dos objetos geométricos.
 
-# In[14]:
+# In[13]:
 
 
 def init():
@@ -738,7 +738,7 @@ def init():
 
 # Ambiente global do código. Utilizamos principalmente para definir as variáveis utilizadas nas funções de transformação.
 
-# In[15]:
+# In[14]:
 
 
 # x-translation and y-translation for clouds

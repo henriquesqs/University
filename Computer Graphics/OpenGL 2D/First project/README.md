@@ -26,3 +26,6 @@ python3 project.py
 
 ## Notes
 - There is a vertical limit so you can't translate the man and the bird to the sky.
+
+## Preview
+![](https://i.imgur.com/klZy5DB.png)
