@@ -1,8 +1,9 @@
 # First project
-This project illustrates a scene with a bird, a man and other objects composed by the basic primitives (triangles, squares, circles etc). With this project you can:
+This project illustrates a scene with a bird, a man and other objects composed by the basic primitives (triangles, squares, circles etc). This project:
 
-- Translate the man and the bird;
-- Rotate and switch the scene from day to night;
+- Allows you to translate the man and the bird;
+- Allows you to rotate and switch the scene from day to night;
+- Automatically translates the clouds left to right (and vice versa).
 
 ## Getting started
 First, install **[python3](https://www.python.org/)** and **[pip](https://pip.pypa.io/en/stable/installing/)**. 
