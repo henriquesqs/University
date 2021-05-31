@@ -103,11 +103,11 @@ def key_event(window, key, scancode, action, mods):
         t_z -= 0.01
 
     # If the user presses arrow keys
-    if key == 265:  # up
+    if key == 265: # up
         s_x += 0.05
         s_y += 0.05
         s_z += 0.05
-    elif key == 264:  # down
+    elif key == 264: # down
         s_x -= 0.05
         s_y -= 0.05
         s_z -= 0.05
