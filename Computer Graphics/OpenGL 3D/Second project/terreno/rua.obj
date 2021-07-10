@@ -1,17 +1,3 @@
-# Blender v2.93.1 OBJ File: 'modelo.blend'
-# www.blender.org
-mtllib rua.mtl
-o Plane.003
-v -29.376781 0.000000 99.705673
-v -29.376781 0.000000 -99.797211
-v -60.817509 0.000000 99.705711
-v -60.817509 0.000000 -99.797127
-vt -8.254595 0.000000
-vt 9.254595 1.000000
-vt -8.254595 1.000000
-vt 9.254595 0.000000
-vn 0.0000 1.0000 0.0000
-usemtl Material.002
-s off
-f 1/1/1 4/2/1 3/3/1
-f 1/1/1 2/4/1 4/2/1
+version https://git-lfs.github.com/spec/v1
+oid sha256:060890d1d62b97c2d71af072e111cd9d4cc2aaf68a47e39345678f70b8b193cb
+size 394
