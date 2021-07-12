@@ -876,16 +876,16 @@ def load_model_and_texture(vertices_list, textures_coord_list, model_file, textu
     modelo = load_model_from_file(model_file)
 
     if len(model_name) > 1:
-        print('Processando modelo ' +
-              model_name[1] + '. Vertice inicial:', len(vertices_list))
+        print('Processing model ' +
+              model_name[1] + '. Initial vertex:', len(vertices_list))
     else:
-        print('Processando modelo ' +
-              model_name[0] + '. Vertice inicial:', len(vertices_list))
+        print('Processing model ' +
+              model_name[0] + '. Initial vertex:', len(vertices_list))
 
     # inserindo vertices do modelo no vetor de vertices
     for face in modelo['faces']:
         if face[2] not in faces_visited:
-            print(face[2], ' vertice inicial =', len(vertices_list))
+            print(face[2], ' initial vertex =', len(vertices_list))
             faces_visited.append(face[2])
         for vertice_id in face[0]:
             vertices_list.append(modelo['vertices'][vertice_id-1])
@@ -893,10 +893,10 @@ def load_model_and_texture(vertices_list, textures_coord_list, model_file, textu
             textures_coord_list.append(modelo['texture'][texture_id-1])
 
     if len(model_name) > 1:
-        print('Processando modelo ' +
+        print('Processing model ' +
               model_name[1] + '. Vertice final:', len(vertices_list))
     else:
-        print('Processando modelo ' +
+        print('Processing model ' +
               model_name[0] + '. Vertice final:', len(vertices_list))
 
     # if we're going to load only one texture for the .obj
