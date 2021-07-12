@@ -1,4 +1,4 @@
-# Second project: 3d Model
+# Second project: 3d Scenario
 This projects aims to create a 3D scenario using Wavefront objects generated from 3D models using [Blender](https://www.blender.org/).
 
 ![Preview of the running project](https://i.imgur.com/Sfiq1Zu.png)
