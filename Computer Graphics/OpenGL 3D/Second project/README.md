@@ -44,7 +44,7 @@ python3 project.py
 5. **[Birch tree](https://free3d.com/3d-model/birch-tree-48016.html)** by [sandralavixen](https://free3d.com/user/sandralavixen)
 
 ## Project credits
-- [Bruno dos Santos](github.com/brunin-cps/)
+- [Bruno dos Santos](https://github.com/brunin-cps/)
 - Me
-- [Witor M. A. de Oliveira](github.com/witorMao/)
-- **And a huge thanks to [Paulinho](github.com/pau1o-hs/) who taught us how to use Blender** :heart:
+- [Witor M. A. de Oliveira](https://github.com/witorMao/)
+- **And a huge thanks to [Paulinho](https://github.com/pau1o-hs/) who taught us how to use Blender** :heart:
