@@ -51,6 +51,7 @@ def key_event(window, key, scancode, action, mods):
     elif cameraPos[2] > 96:
         cameraPos[2] = 96
 
+    # to toggle polygonal mode
     if key == 80 and action == 1 and polygonal_mode == True:
         polygonal_mode = False
     elif key == 80 and action == 1 and polygonal_mode == False:
@@ -149,19 +150,19 @@ def model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z):
 
     angle = math.radians(angle)
 
-    matrix_transform = glm.mat4(1.0)  # instanciando uma matriz identidade
+    matrix_transform = glm.mat4(1.0)  # identity matrix
 
-    # aplicando translacao
+    # applies translation
     matrix_transform = glm.translate(matrix_transform, glm.vec3(t_x, t_y, t_z))
 
-    # aplicando rotacao
+    # applies rotation
     matrix_transform = glm.rotate(
         matrix_transform, angle, glm.vec3(r_x, r_y, r_z))
 
-    # aplicando escala
+    # applies scale
     matrix_transform = glm.scale(matrix_transform, glm.vec3(s_x, s_y, s_z))
 
-    # pegando a transposta da matriz (glm trabalha com ela invertida)
+    # gets transpose matrix (glm works with its inverse)
     matrix_transform = np.array(matrix_transform).T
 
     return matrix_transform
@@ -197,312 +198,312 @@ def load_default_transformations_parameters(program):
 
 def draw_ground(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
-    # define id da textura do modelo
+    # defines texture model id
     glBindTexture(GL_TEXTURE_2D, 0)
-    glDrawArrays(GL_TRIANGLES, 0, 6)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 0, 6)  # renders
 
 
 def draw_house(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
-    # define id da textura do modelo
+    # defines texture model id
     glBindTexture(GL_TEXTURE_2D, 1)
-    glDrawArrays(GL_TRIANGLES, 6, 1434-6)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 6, 1434-6)  # renders
 
 
 def draw_trees(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
-    # desenha flores das arvores
+    # draws trees flowers
     glBindTexture(GL_TEXTURE_2D, 3)
-    glDrawArrays(GL_TRIANGLES, 1440, 195717-1440)  # renderizando
-
-    glBindTexture(GL_TEXTURE_2D, 3)
-    glDrawArrays(GL_TRIANGLES, 197808, 392085-197808)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 1440, 195717-1440)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 3)
-    glDrawArrays(GL_TRIANGLES, 394176, 588453-394176)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 197808, 392085-197808)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 3)
-    glDrawArrays(GL_TRIANGLES, 590544, 784821-590544)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 394176, 588453-394176)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 3)
-    glDrawArrays(GL_TRIANGLES, 786912, 981189-786912)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 590544, 784821-590544)  # renders
 
-    # desenha tronco das arvores
-    glBindTexture(GL_TEXTURE_2D, 4)
-    glDrawArrays(GL_TRIANGLES, 392085, 394176-392085)  # renderizando
+    glBindTexture(GL_TEXTURE_2D, 3)
+    glDrawArrays(GL_TRIANGLES, 786912, 981189-786912)  # renders
 
+    # draws trees torse
     glBindTexture(GL_TEXTURE_2D, 4)
-    glDrawArrays(GL_TRIANGLES, 195717, 197808-195717)  # renderizando
-
-    glBindTexture(GL_TEXTURE_2D, 4)
-    glDrawArrays(GL_TRIANGLES, 588453, 590544-588453)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 392085, 394176-392085)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 4)
-    glDrawArrays(GL_TRIANGLES, 784821, 786912-784821)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 195717, 197808-195717)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 4)
-    glDrawArrays(GL_TRIANGLES, 981189, 983280-981189)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 588453, 590544-588453)  # renders
+
+    glBindTexture(GL_TEXTURE_2D, 4)
+    glDrawArrays(GL_TRIANGLES, 784821, 786912-784821)  # renders
+
+    glBindTexture(GL_TEXTURE_2D, 4)
+    glDrawArrays(GL_TRIANGLES, 981189, 983280-981189)  # renders
 
 
 def draw_frog(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
-    # desenha flores das arvores
+    # draws frog
     glBindTexture(GL_TEXTURE_2D, 5)
-    glDrawArrays(GL_TRIANGLES, 983280, 1157328-983280)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 983280, 1157328-983280)  # renders
 
 
 def draw_horse(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_custom_transformations_parameters(program,
                                            0.0, 0.0, 0.0, 1, -40, 0, 0, 0.7, 0.7, 0.7)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
-    # desenha cavalo
+    # draws horse
     glBindTexture(GL_TEXTURE_2D, 10)
-    glDrawArrays(GL_TRIANGLES, 1157328, 1256952-1157328)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 1157328, 1256952-1157328)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 11)
-    glDrawArrays(GL_TRIANGLES, 1157328, 1256952-1157328)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 1157328, 1256952-1157328)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 12)
-    glDrawArrays(GL_TRIANGLES, 1157328, 1256952-1157328)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 1157328, 1256952-1157328)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 6)
-    glDrawArrays(GL_TRIANGLES, 1256952, 1274052-1256952)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 1256952, 1274052-1256952)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 7)
-    glDrawArrays(GL_TRIANGLES, 1276332, 1282092-1276332)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 1276332, 1282092-1276332)  # renders
 
 
 def draw_chair(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 13)
-    glDrawArrays(GL_TRIANGLES, 1282092, 2753433-1282092)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 1282092, 2753433-1282092)  # renders
 
 
 def draw_screen(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 14)
-    glDrawArrays(GL_TRIANGLES, 2753433, 2764542-2753433)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2753433, 2764542-2753433)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 15)
-    glDrawArrays(GL_TRIANGLES, 2764542, 2765082-2764542)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2764542, 2765082-2764542)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 14)
-    glDrawArrays(GL_TRIANGLES, 2765082, 2765112-2765082)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2765082, 2765112-2765082)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 16)
-    glDrawArrays(GL_TRIANGLES, 2765112, 2765382-2765112)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2765112, 2765382-2765112)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 17)
-    glDrawArrays(GL_TRIANGLES, 2765382, 2766762-2765382)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2765382, 2766762-2765382)  # renders
 
 
 def draw_table(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 18)
-    glDrawArrays(GL_TRIANGLES, 2766762, 2767818-2766762)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2766762, 2767818-2766762)  # renders
 
 
 def draw_cpu(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 17)
-    glDrawArrays(GL_TRIANGLES, 2767818, 2767962-2767818)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2767818, 2767962-2767818)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 14)
-    glDrawArrays(GL_TRIANGLES, 2767962, 3361914-2767962)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 2767962, 3361914-2767962)  # renders
 
 
 def draw_wind_mill_body(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_custom_transformations_parameters(
         program, 0, 0, 0, 1, 40, 0, 0, 1, 1, 1)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 20)
-    glDrawArrays(GL_TRIANGLES, 3364872, 3364974-3364872)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3364872, 3364974-3364872)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 20)
-    glDrawArrays(GL_TRIANGLES, 3364974, 3371022-3364974)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3364974, 3371022-3364974)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 20)
-    glDrawArrays(GL_TRIANGLES, 3371022, 3371154-3371022)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3371022, 3371154-3371022)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 25)
-    glDrawArrays(GL_TRIANGLES, 3371154, 3371922-3371154)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3371154, 3371922-3371154)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 22)
-    glDrawArrays(GL_TRIANGLES, 3371922, 3371970-3371922)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3371922, 3371970-3371922)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 24)
-    glDrawArrays(GL_TRIANGLES, 3371970, 3372390-3371970)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3371970, 3372390-3371970)  # renders
 
 
 def draw_wind_mill_circle(program, rotacao_inc):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_custom_transformations_parameters(program,
                                            rotacao_inc, 1, 0, 0, 30.8, 40.4, -0.5, 1, 1, 1)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 21)
-    glDrawArrays(GL_TRIANGLES, 3361914, 3363042-3361914)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3361914, 3363042-3361914)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 21)
-    glDrawArrays(GL_TRIANGLES, 3363042, 3364578-3363042)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3363042, 3364578-3363042)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 23)
-    glDrawArrays(GL_TRIANGLES, 3364578, 3364596-3364578)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3364578, 3364596-3364578)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 23)
-    glDrawArrays(GL_TRIANGLES, 3364596, 3364614-3364596)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3364596, 3364614-3364596)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 23)
-    glDrawArrays(GL_TRIANGLES, 3364614, 3364800-3364614)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3364614, 3364800-3364614)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 23)
-    glDrawArrays(GL_TRIANGLES, 3364800, 3364854-3364800)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3364800, 3364854-3364800)  # renders
 
     glBindTexture(GL_TEXTURE_2D, 23)
-    glDrawArrays(GL_TRIANGLES, 3364854, 3364872-3364854)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3364854, 3364872-3364854)  # renders
 
 
 def draw_sky(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(1 + lightOffset, 1, 0.9, 500, program)
 
     glBindTexture(GL_TEXTURE_2D, 28)
-    glDrawArrays(GL_TRIANGLES, 3372390, 3372426-3372390)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3372390, 3372426-3372390)  # renders
 
 
 def draw_street(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 29)
-    glDrawArrays(GL_TRIANGLES, 3372426, 3372432-3372426)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3372426, 3372432-3372426)  # renders
 
 
 def draw_secondary_yard(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 0)
-    glDrawArrays(GL_TRIANGLES, 3372432, 3372438-3372432)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3372432, 3372438-3372432)  # renders
 
 
 def draw_floor(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 30)
-    glDrawArrays(GL_TRIANGLES, 3372438, 3372522-3372438)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3372438, 3372522-3372438)  # renders
 
 
 def draw_keyboard(program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_default_transformations_parameters(program)
 
     load_light_parameters(0.1 + lightOffset, 0.1, 0.9, 64, program)
 
     glBindTexture(GL_TEXTURE_2D, 31)
-    glDrawArrays(GL_TRIANGLES, 3372522, 3464400-3372522)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3372522, 3464400-3372522)  # renders
 
 
 def load_light_parameters(ka, kd, ks, ns, program):
 
-    # recuperando localizacao da variavel ka na GPU
+    # recovers variable ka location on GPU
     loc_ka = glGetUniformLocation(program, "ka")
     glUniform1f(loc_ka, ka)  # envia ka pra gpu
 
-    # recuperando localizacao da variavel kd na GPU
+    # recovers variable kd location on GPU
     loc_kd = glGetUniformLocation(program, "kd")
     glUniform1f(loc_kd, kd)  # envia kd pra gpu
 
-    # recuperando localizacao da variavel ks na GPU
+    # recovers variable ks location on GPU
     loc_ks = glGetUniformLocation(program, "ks")
     glUniform1f(loc_ks, ks)  # envia ks pra gpu
 
-    # recuperando localizacao da variavel ns na GPU
+    # recovers variable ns location on GPU
     loc_ns = glGetUniformLocation(program, "ns")
     glUniform1f(loc_ns, ns)  # envia ns pra gpu
 
 
-def draw_sun(x, y, z, program):
+def draw_moon(x, y, z, program):
 
-    # aplica a matriz model (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    # applies model matrix (angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     load_custom_transformations_parameters(
         program, 0.0, 0.0, 1.0, 0.0, x, y - 60, z, 1, 1, 1)
 
     load_light_parameters(1, 1, 1, 1000.0, program)
 
-    # recuperando localizacao da variavel lightPos na GPU
+    # recovers variable lightPos location on GPU
     loc_light_pos = glGetUniformLocation(program, "lightPos")
 
-    # posicao da fonte de luz
+    # light source position
     glUniform3f(loc_light_pos, x, y - 60, z)
 
-    # define id da textura do modelo
+    # defines texture model id
     glBindTexture(GL_TEXTURE_2D, 32)
-    glDrawArrays(GL_TRIANGLES, 3464400, 3467280-3464400)  # renderizando
+    glDrawArrays(GL_TRIANGLES, 3464400, 3467280-3464400)  # renders
 
 
 def upload_data(buffer, data, program, size, name):
@@ -531,11 +532,10 @@ def send_to_gpu(vertices_list, textures_list, normals_list, program):
 
     # Now, send the textures coordinates list
     textures = np.zeros(len(textures_list), [("position", np.float32, 2)])
-    # print("shape: ", textures.shape, len(textures_list))
     textures['position'] = textures_list
     upload_data(buffer[1], textures, program, 2, "texture_coord")
 
-    # Now, send the normal list
+    # Now, send the normals list
     normals = np.zeros(len(normals_list), [("position", np.float32, 3)])
     normals['position'] = normals_list
     upload_data(buffer[2], normals, program, 3, "normals")
@@ -557,15 +557,17 @@ def show_window(window, program):
 
         glfw.poll_events()
 
+        # clear the screen color and set to black
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
         glClearColor(0, 0, 0, 1)
 
+        # check if polygonal mode is on
         if polygonal_mode == True:
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
         if polygonal_mode == False:
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
 
+        # draws objects
         draw_ground(program)
         draw_house(program)
         draw_trees(program)
@@ -583,11 +585,14 @@ def show_window(window, program):
         draw_floor(program)
         draw_keyboard(program)
 
+        # increases rotacao_inc to rotate the windmill circle
         rotacao_inc += 0.1
 
+        # increases moon_angle to rotate the moon
         moon_angle += 0.3
-        draw_sun(70 * np.cos(np.deg2rad(moon_angle)),
-                 70, 70 * np.sin(np.deg2rad(moon_angle)), program)
+
+        draw_moon(70 * np.cos(np.deg2rad(moon_angle)),
+                  70, 70 * np.sin(np.deg2rad(moon_angle)), program)
 
         mat_view = view()
         loc_view = glGetUniformLocation(program, "view")
@@ -597,12 +602,12 @@ def show_window(window, program):
         loc_projection = glGetUniformLocation(program, "projection")
         glUniformMatrix4fv(loc_projection, 1, GL_FALSE, mat_projection)
 
-        # atualizando a posicao da camera/observador na GPU para calculo da reflexao especular
+        # updates the camera position on GPU to calcula specular reflection
 
-        # recuperando localizacao da variavel viewPos na GPU
+        # recover viesPos variable position on GPU
         loc_view_pos = glGetUniformLocation(program, "viewPos")
 
-        # posicao da camera/observador (x,y,z)
+        # camera position (x, y, z)
         glUniform3f(loc_view_pos, cameraPos[0], cameraPos[1], cameraPos[2])
 
         glfw.swap_buffers(window)
@@ -624,27 +629,27 @@ def load_model_from_file(filename):
 
     material = None
 
-    # abre o arquivo obj para leitura
-    for line in open(filename, "r"):  # para cada linha do arquivo .obj
+    # opens .obj file to read
+    for line in open(filename, "r"):
         if line.startswith('#'):
-            continue  # ignora comentarios
-        values = line.split()  # quebra a linha por espaço
+            continue  # ignore comments
+        values = line.split()  # breaks line by space
         if not values:
             continue
 
-        # recuperando vertices
+        # recover vertices
         if values[0] == 'v':
             vertices.append(values[1:4])
 
-        # recuperando vertices
+        # recover normal vertices
         if values[0] == 'vn':
             normals.append(values[1:4])
 
-        # recuperando coordenadas de textura
+        # recover textures coordinates
         elif values[0] == 'vt':
             texture_coords.append(values[1:3])
 
-        # recuperando faces
+        # recover faces
         elif values[0] in ('usemtl', 'usemat'):
             material = values[1]
         elif values[0] == 'f':
@@ -684,32 +689,27 @@ def load_texture_from_file(texture_id, img_textura):
     img_width = img.size[0]
     img_height = img.size[1]
     image_data = img.convert("RGBA").tobytes("raw", "RGBA", 0, -1)
-    #image_data = img.tobytes("raw", "RGB", 0, -1)
-    #image_data = np.array(list(img.getdata()), np.uint8)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_width, img_height,
                  0, GL_RGBA, GL_UNSIGNED_BYTE, image_data)
 
 
-def load_model_and_texture(vertices_list, normals_list, textures_coord_list, model_file, texture_files, id):
+def load_model_and_texture(vertices_list, normals_list, textures_coord_list, model_file, texture_files, id_offset):
 
     faces_visited = []
     model_name = model_file.split('/')
 
-    # carregando o modelo e a textura equivalente e definindo um id (buffer)
+    # load model, its own texture and gives this texture an id
     modelo = load_model_from_file(model_file)
 
     if len(model_name) > 1:
-        print('Processando modelo ' +
-              model_name[1] + '. Vertice inicial:', len(vertices_list))
+        print('Processing model ' +
+              model_name[1] + '. Inital vertex:', len(vertices_list))
     else:
-        print('Processando modelo ' +
-              model_name[0] + '. Vertice inicial:', len(vertices_list))
+        print('Processing model ' +
+              model_name[0] + '. Inital vertex:', len(vertices_list))
 
-    # inserindo vertices do modelo no vetor de vertices
+    # inserts model vertices on vertices array
     for face in modelo['faces']:
-        # if face[2] not in faces_visited:
-        #     print(face[2], ' vertice inicial =', len(vertices_list))
-        #     faces_visited.append(face[2])
         for vertice_id in face[0]:
             vertices_list.append(modelo['vertices'][vertice_id-1])
         for texture_id in face[1]:
@@ -718,20 +718,20 @@ def load_model_and_texture(vertices_list, normals_list, textures_coord_list, mod
             normals_list.append(modelo['normals'][normal_id-1])
 
     if len(model_name) > 1:
-        print('Processando modelo ' +
-              model_name[1] + '. Vertice final:', len(vertices_list))
+        print('Processing model ' +
+              model_name[1] + '. Final vertex:', len(vertices_list))
     else:
-        print('Processando modelo ' +
-              model_name[0] + '. Vertice final:', len(vertices_list))
+        print('Processing model ' +
+              model_name[0] + '. Final vertex:', len(vertices_list))
 
     # in case we're going to load more than one texture for the .obj.
-    # we sum texture_id + id because if we loaded some texture before,
+    # we sum texture_id + id_offset because if we loaded some texture before,
     # we need to load the new textures considering the already added ones
     if len(texture_files) > 0:
         for texture_id in range(len(texture_files)):
-            print(texture_id + id, texture_files[texture_id])
+            print(texture_id + id_offset, texture_files[texture_id])
             load_texture_from_file(
-                texture_id + id, texture_files[texture_id])
+                texture_id + id_offset, texture_files[texture_id])
 
     return vertices_list, normals_list, textures_coord_list
 
