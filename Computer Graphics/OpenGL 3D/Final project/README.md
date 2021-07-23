@@ -51,4 +51,4 @@ python3 project.py
 - [Bruno dos Santos](https://github.com/brunin-cps/)
 - Me
 - [Witor M. A. de Oliveira](https://github.com/witorMao/)
-- **And a huge thanks to [Paulinho](https://github.com/pau1o-hs/) who taught us how to use Blender** :heart:
+- **And a huge thanks to [Paulinho](https://github.com/pau1o-hs/) who taught us how to use Blender and helped us on this project every time we needed** :heart:
