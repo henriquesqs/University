@@ -1,7 +1,9 @@
-# Second project: 3d Scenario
+# 3d Scenario with Luminosity and Specular Reflection
 This projects aims to create a 3D scenario using Wavefront objects generated from 3D models using [Blender](https://www.blender.org/).
 
-![Preview of the running project](https://i.imgur.com/Sfiq1Zu.png)
+There's a moon rotating on this scenario reflecting its light on all the objects using the [Phong's Reflection Model](https://en.wikipedia.org/wiki/Phong_reflection_model). If you wait patiently, you'll see the reflection based on where the camera (your cursor) is pointing to.
+
+![Preview of the running project](https://i.imgur.com/QQiKl33.png)
 ## Requisites
 - [Python](https://www.python.org/downloads/) 3+
 - [pip](https://pip.pypa.io/en/stable/installing/)
@@ -22,6 +24,8 @@ python3 project.py
 - `W, A, S, D` keyboard keys moves the camera
   
 - `P` keyboard key toggles the polygon mode
+
+- `U` and `I` to increase and decrease scenario luminosity, respectively
 
 - `Mouse` rotates the camera
   
