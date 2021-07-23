@@ -876,16 +876,16 @@ def load_model_and_texture(vertices_list, textures_coord_list, model_file, textu
     modelo = load_model_from_file(model_file)
 
     if len(model_name) > 1:
-        print('Processing model ' +
-              model_name[1] + '. Initial vertex:', len(vertices_list))
+        print('Processando modelo ' +
+              model_name[1] + '. Vertice inicial:', len(vertices_list))
     else:
-        print('Processing model ' +
-              model_name[0] + '. Initial vertex:', len(vertices_list))
+        print('Processando modelo ' +
+              model_name[0] + '. Vertice inicial:', len(vertices_list))
 
     # inserindo vertices do modelo no vetor de vertices
     for face in modelo['faces']:
         if face[2] not in faces_visited:
-            print(face[2], ' initial vertex =', len(vertices_list))
+            print(face[2], ' vertice inicial =', len(vertices_list))
             faces_visited.append(face[2])
         for vertice_id in face[0]:
             vertices_list.append(modelo['vertices'][vertice_id-1])
@@ -893,10 +893,10 @@ def load_model_and_texture(vertices_list, textures_coord_list, model_file, textu
             textures_coord_list.append(modelo['texture'][texture_id-1])
 
     if len(model_name) > 1:
-        print('Processing model ' +
+        print('Processando modelo ' +
               model_name[1] + '. Vertice final:', len(vertices_list))
     else:
-        print('Processing model ' +
+        print('Processando modelo ' +
               model_name[0] + '. Vertice final:', len(vertices_list))
 
     # if we're going to load only one texture for the .obj
@@ -930,124 +930,124 @@ def generate_models_and_textures(NUM_TEXTURES):
     textures_coord_list = []
 
     ground_textures = [
-        'textures/ground/grama.jpg'
+        'terreno/grama.jpg'
     ]
 
     house_textures = [
-        'textures/cottage/cottage_diffuse.png',
-        'textures/cottage/cottage_normal.png'
+        'abandonada/cottage_diffuse.png',
+        'abandonada/cottage_normal.png'
     ]
 
     trees_textures = [
-        'textures/trees/leaf.jpg',
-        'textures/trees/stem.jpg'
+        'trees/leaf.jpg',
+        'trees/stem.jpg'
     ]
 
     frog_textures = [
-        'textures/frog/frog.jpg'
+        'frog/frog.jpg'
     ]
 
     horse_textures = [
-        'textures/horse/butthorse.png',
-        'textures/horse/butthorseeye.png',
-        'textures/horse/butthorsenorm.png',
-        'textures/horse/butthorsespec.png',
-        'textures/horse/hairblond.png',
-        'textures/horse/hairblondnormal.png',
-        'textures/horse/hairblondspec.png'
+        'horse/butthorse.png',
+        'horse/butthorseeye.png',
+        'horse/butthorsenorm.png',
+        'horse/butthorsespec.png',
+        'horse/hairblond.png',
+        'horse/hairblondnormal.png',
+        'horse/hairblondspec.png'
     ]
 
     chair_textures = [
-        'textures/gaming_chair/lambert112SG_baseColor.png'
+        'gaming_chair/lambert112SG_baseColor.png'
     ]
 
     screen_textures = [
-        'textures/screen/texture.png',
-        'textures/screen/texture1.png',
-        'textures/screen/texture2.png',
-        'textures/screen/texture3.png'
+        'tela/texture.png',
+        'tela/texture1.png',
+        'tela/texture2.png',
+        'tela/texture3.png'
     ]
 
     table_textures = [
-        'textures/table/texturaMesa.jpg'
+        'escrivaninha/texturaMesa.jpg'
     ]
 
     cpu_textures = [
-        'textures/table/texturaMesa.jpg'
+        'escrivaninha/texturaMesa.jpg'
     ]
 
     win_mill_textures = [
-        'textures/windMill/textures/wood.jpg',
-        'textures/windMill/textures/rust1.jpg',
-        'textures/windMill/textures/lightblue.png',
-        'textures/windMill/textures/rust.jpg',
-        'textures/windMill/textures/gray.png',
-        'textures/windMill/textures/darkgray.png'
+        'windMill/textures/wood.jpg',
+        'windMill/textures/rust1.jpg',
+        'windMill/textures/lightblue.png',
+        'windMill/textures/rust.jpg',
+        'windMill/textures/gray.png',
+        'windMill/textures/darkgray.png'
     ]
 
     sky_textures = [
-        'textures/sky/ceu_texture.png',
+        'ceu/ceu_texture.png',
     ]
 
     street_textures = [
-        'textures/ground/rua.jpg',
+        'terreno/rua.jpg',
     ]
 
     floor_textures = [
-        'textures/ground/piso.jpg',
+        'terreno/piso.jpg',
     ]
 
     keyboard_textures = [
-        'textures/keyboard/pl.jpg',
+        'keyboard/pl.jpg',
     ]
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/ground/quintal.obj', ground_textures, 0)
+        vertices_list, textures_coord_list, 'terreno/quintal.obj', ground_textures, 0)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/cottage/cottage_obj.obj', house_textures, 1)
+        vertices_list, textures_coord_list, 'abandonada/cottage_obj.obj', house_textures, 1)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/trees/birch_tree.obj', trees_textures, 3)
+        vertices_list, textures_coord_list, 'trees/birch_tree.obj', trees_textures, 3)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/frog/frog.obj', frog_textures, 5)
+        vertices_list, textures_coord_list, 'frog/frog.obj', frog_textures, 5)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/horse/horse.obj', horse_textures, 6)
+        vertices_list, textures_coord_list, 'horse/horse.obj', horse_textures, 6)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/gaming_chair/chair.obj', chair_textures, 13)
+        vertices_list, textures_coord_list, 'gaming_chair/chair.obj', chair_textures, 13)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/screen/tela.obj', screen_textures, 14)
+        vertices_list, textures_coord_list, 'tela/tela.obj', screen_textures, 14)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/table/mesa.obj', table_textures, 18)
+        vertices_list, textures_coord_list, 'escrivaninha/mesa.obj', table_textures, 18)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/cpu/cpu.obj', cpu_textures, 19)
+        vertices_list, textures_coord_list, 'CPU/cpu.obj', cpu_textures, 19)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/windMill/rodaMoinho2.obj', win_mill_textures, 20)
+        vertices_list, textures_coord_list, 'windMill/rodaMoinho2.obj', win_mill_textures, 20)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/windMill/corpoMoinho1.obj', [], 20)
+        vertices_list, textures_coord_list, 'windMill/corpoMoinho1.obj', [], 20)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/sky/ceu.obj', sky_textures, 28)
+        vertices_list, textures_coord_list, 'ceu/ceu.obj', sky_textures, 28)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/ground/rua.obj', street_textures, 29)
+        vertices_list, textures_coord_list, 'terreno/rua.obj', street_textures, 29)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/ground/quintal_lado_oposto.obj', ground_textures, 0)
+        vertices_list, textures_coord_list, 'terreno/quintal_lado_oposto.obj', ground_textures, 0)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/ground/piso.obj', floor_textures, 30)
+        vertices_list, textures_coord_list, 'terreno/piso.obj', floor_textures, 30)
 
     vertices_list, textures_coord_list = load_model_and_texture(
-        vertices_list, textures_coord_list, 'textures/keyboard/keyboard.obj', keyboard_textures, 31)
+        vertices_list, textures_coord_list, 'keyboard/keyboard.obj', keyboard_textures, 31)
 
     return vertices_list, textures_coord_list
 
