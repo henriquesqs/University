@@ -16,6 +16,8 @@ from PIL import Image
 
 
 def key_event(window, key, scancode, action, mods):
+    """ Gives functions for some keys"""
+
     global lightOffset
     global fovy, aspect, near, far
     global cameraPos, cameraFront, cameraUp, polygonal_mode
@@ -85,6 +87,7 @@ def key_event(window, key, scancode, action, mods):
 
 
 def mouse_event(window, xpos, ypos):
+    """Gives functions for mouse buttons"""
 
     global firstMouse, cameraFront, yaw, pitch, lastX, lastY
 
@@ -185,12 +188,14 @@ def projection():
 
 
 def load_custom_transformations_parameters(program, angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z):
+    """Loads custom parameters for transformation matrix"""
     mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     loc_model = glGetUniformLocation(program, "model")
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
 
 
 def load_default_transformations_parameters(program):
+    """Loads predefined parameters for transformation matrix"""
     mat_model = model(0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1, 1, 1)
     loc_model = glGetUniformLocation(program, "model")
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
@@ -469,6 +474,7 @@ def draw_keyboard(program):
 
 
 def load_light_parameters(ka, kd, ks, ns, program):
+    """Loads custom parameters for luminosity"""
 
     # recovers variable ka location on GPU
     loc_ka = glGetUniformLocation(program, "ka")
