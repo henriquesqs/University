@@ -28,6 +28,6 @@ We've done this project using **sqldeveloper** so this tutorial will assume you'
 
 Now you should see a prompt screen with a menu helping you through our application. 
 
-![Application preview](https://github.com/henriquesqs/University/blob/master/Databases/preview.png?raw=true)
+![Application preview](https://github.com/henriquesqs/University/blob/main/Databases/preview.png?raw=true)
 
 Have fun! :)
